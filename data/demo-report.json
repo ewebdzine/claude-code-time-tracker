@@ -1,0 +1,3519 @@
+{
+ "generatedAt": 1784909904816,
+ "claudeDir": "~/.claude (demo data)",
+ "idleThresholdMs": 900000,
+ "totalActiveMs": 401914206.42700195,
+ "sessionCount": 94,
+ "projectCount": 6,
+ "projects": [
+  {
+   "projectPath": "/home/demo/projects/mobile-app",
+   "projectName": "mobile-app",
+   "activeMs": 79363884.19165039,
+   "sessionCount": 17,
+   "firstEvent": 1778643864051.344,
+   "lastEvent": 1784887114335.2383,
+   "sessions": [
+    {
+     "sessionId": "demo-mobile-app-0",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1784884478515.5315,
+     "lastEvent": 1784887114335.2383,
+     "activeMs": 2635819.7067871094,
+     "spanMs": 2635819.7067871094,
+     "blocks": [
+      {
+       "start": 1784884478515.5315,
+       "end": 1784887114335.2383,
+       "durationMs": 2635819.7067871094,
+       "eventCount": 26,
+       "userMessages": 13,
+       "assistantMessages": 13
+      }
+     ],
+     "eventCount": 26,
+     "userMessages": 13,
+     "assistantMessages": 13,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-0.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-70",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1784273036488.821,
+     "lastEvent": 1784273701310.4678,
+     "activeMs": 664821.6467285156,
+     "spanMs": 664821.6467285156,
+     "blocks": [
+      {
+       "start": 1784273036488.821,
+       "end": 1784273701310.4678,
+       "durationMs": 664821.6467285156,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      }
+     ],
+     "eventCount": 6,
+     "userMessages": 3,
+     "assistantMessages": 3,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-70.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-90",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1784080790601.78,
+     "lastEvent": 1784082265374.157,
+     "activeMs": 1474772.376953125,
+     "spanMs": 1474772.376953125,
+     "blocks": [
+      {
+       "start": 1784080790601.78,
+       "end": 1784082265374.157,
+       "durationMs": 1474772.376953125,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      }
+     ],
+     "eventCount": 14,
+     "userMessages": 7,
+     "assistantMessages": 7,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-90.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-170",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1783395467844.0112,
+     "lastEvent": 1783407108716.6846,
+     "activeMs": 5117401.575927734,
+     "spanMs": 11640872.673339844,
+     "blocks": [
+      {
+       "start": 1783395467844.0112,
+       "end": 1783396986930.4058,
+       "durationMs": 1519086.39453125,
+       "eventCount": 18,
+       "userMessages": 9,
+       "assistantMessages": 9
+      },
+      {
+       "start": 1783403510401.5032,
+       "end": 1783407108716.6846,
+       "durationMs": 3598315.1813964844,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      }
+     ],
+     "eventCount": 56,
+     "userMessages": 28,
+     "assistantMessages": 28,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-170.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-172",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1783395280767.8718,
+     "lastEvent": 1783401458792.8096,
+     "activeMs": 3278681.714111328,
+     "spanMs": 6178024.937744141,
+     "blocks": [
+      {
+       "start": 1783395280767.8718,
+       "end": 1783396379017.1294,
+       "durationMs": 1098249.2575683594,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      },
+      {
+       "start": 1783399278360.353,
+       "end": 1783401458792.8096,
+       "durationMs": 2180432.4565429688,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      }
+     ],
+     "eventCount": 36,
+     "userMessages": 18,
+     "assistantMessages": 18,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-172.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-241",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1782798594124.4146,
+     "lastEvent": 1782812460272.5193,
+     "activeMs": 4630236.430175781,
+     "spanMs": 13866148.104736328,
+     "blocks": [
+      {
+       "start": 1782798594124.4146,
+       "end": 1782801655972.1685,
+       "durationMs": 3061847.75390625,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1782810891883.843,
+       "end": 1782812460272.5193,
+       "durationMs": 1568388.6762695312,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      }
+     ],
+     "eventCount": 48,
+     "userMessages": 24,
+     "assistantMessages": 24,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-241.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-270",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1782550184158.184,
+     "lastEvent": 1782562342939.6294,
+     "activeMs": 1767271.0769042969,
+     "spanMs": 12158781.4453125,
+     "blocks": [
+      {
+       "start": 1782550184158.184,
+       "end": 1782550394902.1006,
+       "durationMs": 210743.91650390625,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      },
+      {
+       "start": 1782560786412.469,
+       "end": 1782562342939.6294,
+       "durationMs": 1556527.1604003906,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      }
+     ],
+     "eventCount": 18,
+     "userMessages": 9,
+     "assistantMessages": 9,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-270.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-290",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1782353211451.1033,
+     "lastEvent": 1782356745985.4822,
+     "activeMs": 3534534.37890625,
+     "spanMs": 3534534.37890625,
+     "blocks": [
+      {
+       "start": 1782353211451.1033,
+       "end": 1782356745985.4822,
+       "durationMs": 3534534.37890625,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      }
+     ],
+     "eventCount": 34,
+     "userMessages": 17,
+     "assistantMessages": 17,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-290.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-401",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1781414424465.992,
+     "lastEvent": 1781432131250.6052,
+     "activeMs": 7788857.841308594,
+     "spanMs": 17706784.61328125,
+     "blocks": [
+      {
+       "start": 1781414424465.992,
+       "end": 1781416388797.5396,
+       "durationMs": 1964331.5476074219,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      },
+      {
+       "start": 1781419113334.9006,
+       "end": 1781420667537.324,
+       "durationMs": 1554202.4233398438,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      },
+      {
+       "start": 1781427860926.7349,
+       "end": 1781432131250.6052,
+       "durationMs": 4270323.870361328,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      }
+     ],
+     "eventCount": 88,
+     "userMessages": 44,
+     "assistantMessages": 44,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-401.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-460",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1780897210052.5874,
+     "lastEvent": 1780917591875.0364,
+     "activeMs": 5171090.652099609,
+     "spanMs": 20381822.44897461,
+     "blocks": [
+      {
+       "start": 1780897210052.5874,
+       "end": 1780901258874.2954,
+       "durationMs": 4048821.7080078125,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      },
+      {
+       "start": 1780905995988.2632,
+       "end": 1780906459415.794,
+       "durationMs": 463427.53076171875,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      },
+      {
+       "start": 1780916933033.623,
+       "end": 1780917591875.0364,
+       "durationMs": 658841.4133300781,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      }
+     ],
+     "eventCount": 54,
+     "userMessages": 27,
+     "assistantMessages": 27,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-460.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-500",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1780566312974.8364,
+     "lastEvent": 1780585164603.9736,
+     "activeMs": 6366814.973876953,
+     "spanMs": 18851629.13720703,
+     "blocks": [
+      {
+       "start": 1780566312974.8364,
+       "end": 1780569104038.2593,
+       "durationMs": 2791063.4228515625,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1780573181256.817,
+       "end": 1780575110391.2146,
+       "durationMs": 1929134.3977050781,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      },
+      {
+       "start": 1780583517986.8203,
+       "end": 1780585164603.9736,
+       "durationMs": 1646617.1533203125,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      }
+     ],
+     "eventCount": 72,
+     "userMessages": 36,
+     "assistantMessages": 36,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-500.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-502",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1780568909678.8901,
+     "lastEvent": 1780571640182.6814,
+     "activeMs": 2730503.7912597656,
+     "spanMs": 2730503.7912597656,
+     "blocks": [
+      {
+       "start": 1780568909678.8901,
+       "end": 1780571640182.6814,
+       "durationMs": 2730503.7912597656,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      }
+     ],
+     "eventCount": 32,
+     "userMessages": 16,
+     "assistantMessages": 16,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-502.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-510",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1780464905865.6235,
+     "lastEvent": 1780483946477.108,
+     "activeMs": 6770075.753662109,
+     "spanMs": 19040611.484375,
+     "blocks": [
+      {
+       "start": 1780464905865.6235,
+       "end": 1780465761489.9924,
+       "durationMs": 855624.3688964844,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      },
+      {
+       "start": 1780475963301.3967,
+       "end": 1780479044275.677,
+       "durationMs": 3080974.2802734375,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      },
+      {
+       "start": 1780481113000.0034,
+       "end": 1780483946477.108,
+       "durationMs": 2833477.1044921875,
+       "eventCount": 36,
+       "userMessages": 18,
+       "assistantMessages": 18
+      }
+     ],
+     "eventCount": 80,
+     "userMessages": 40,
+     "assistantMessages": 40,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-510.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-650",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1779244225509.55,
+     "lastEvent": 1779272162638.4248,
+     "activeMs": 10676515.5859375,
+     "spanMs": 27937128.87475586,
+     "blocks": [
+      {
+       "start": 1779244225509.55,
+       "end": 1779248076304.1338,
+       "durationMs": 3850794.5837402344,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      },
+      {
+       "start": 1779254770810.6787,
+       "end": 1779258086830.8447,
+       "durationMs": 3316020.166015625,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      },
+      {
+       "start": 1779268652937.5886,
+       "end": 1779272162638.4248,
+       "durationMs": 3509700.8361816406,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      }
+     ],
+     "eventCount": 110,
+     "userMessages": 55,
+     "assistantMessages": 55,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-650.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-681",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1779014728922.6074,
+     "lastEvent": 1779033140752.691,
+     "activeMs": 9079093.434082031,
+     "spanMs": 18411830.083496094,
+     "blocks": [
+      {
+       "start": 1779014728922.6074,
+       "end": 1779016218710.0308,
+       "durationMs": 1489787.4233398438,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1779018888015.9941,
+       "end": 1779023034464.5264,
+       "durationMs": 4146448.5322265625,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      },
+      {
+       "start": 1779029697895.2124,
+       "end": 1779033140752.691,
+       "durationMs": 3442857.478515625,
+       "eventCount": 36,
+       "userMessages": 18,
+       "assistantMessages": 18
+      }
+     ],
+     "eventCount": 90,
+     "userMessages": 45,
+     "assistantMessages": 45,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-681.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-680",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1779000567411.3293,
+     "lastEvent": 1779022198625.214,
+     "activeMs": 4262572.303466797,
+     "spanMs": 21631213.884765625,
+     "blocks": [
+      {
+       "start": 1779000567411.3293,
+       "end": 1779001959579.1882,
+       "durationMs": 1392167.8588867188,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      },
+      {
+       "start": 1779009386610.1758,
+       "end": 1779011345220.0532,
+       "durationMs": 1958609.8774414062,
+       "eventCount": 18,
+       "userMessages": 9,
+       "assistantMessages": 9
+      },
+      {
+       "start": 1779021286830.647,
+       "end": 1779022198625.214,
+       "durationMs": 911794.5671386719,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      }
+     ],
+     "eventCount": 42,
+     "userMessages": 21,
+     "assistantMessages": 21,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-680.jsonl"
+    },
+    {
+     "sessionId": "demo-mobile-app-720",
+     "projectPath": "/home/demo/projects/mobile-app",
+     "projectName": "mobile-app",
+     "firstEvent": 1778643864051.344,
+     "lastEvent": 1778650708444.9485,
+     "activeMs": 3414820.9494628906,
+     "spanMs": 6844393.6044921875,
+     "blocks": [
+      {
+       "start": 1778643864051.344,
+       "end": 1778646789462.3242,
+       "durationMs": 2925410.9802246094,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      },
+      {
+       "start": 1778650219034.9792,
+       "end": 1778650708444.9485,
+       "durationMs": 489409.96923828125,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      }
+     ],
+     "eventCount": 40,
+     "userMessages": 20,
+     "assistantMessages": 20,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-mobile-app-720.jsonl"
+    }
+   ]
+  },
+  {
+   "projectPath": "/home/demo/projects/api-gateway",
+   "projectName": "api-gateway",
+   "activeMs": 73228698.15209961,
+   "sessionCount": 18,
+   "firstEvent": 1778645256503.2024,
+   "lastEvent": 1784518603972.3894,
+   "sessions": [
+    {
+     "sessionId": "demo-api-gateway-40",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1784516359576.3464,
+     "lastEvent": 1784518603972.3894,
+     "activeMs": 2244396.04296875,
+     "spanMs": 2244396.04296875,
+     "blocks": [
+      {
+       "start": 1784516359576.3464,
+       "end": 1784518603972.3894,
+       "durationMs": 2244396.04296875,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      }
+     ],
+     "eventCount": 24,
+     "userMessages": 12,
+     "assistantMessages": 12,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-40.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-111",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1783909151632.5374,
+     "lastEvent": 1783923684538.2227,
+     "activeMs": 6961379.052001953,
+     "spanMs": 14532905.685302734,
+     "blocks": [
+      {
+       "start": 1783909151632.5374,
+       "end": 1783911988627.4194,
+       "durationMs": 2836994.882080078,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1783917099758.5344,
+       "end": 1783920578183.8984,
+       "durationMs": 3478425.364013672,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      },
+      {
+       "start": 1783923038579.4167,
+       "end": 1783923684538.2227,
+       "durationMs": 645958.8059082031,
+       "eventCount": 8,
+       "userMessages": 4,
+       "assistantMessages": 4
+      }
+     ],
+     "eventCount": 70,
+     "userMessages": 35,
+     "assistantMessages": 35,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-111.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-131",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1783755690476.8008,
+     "lastEvent": 1783766103210.4485,
+     "activeMs": 2356079.26171875,
+     "spanMs": 10412733.647705078,
+     "blocks": [
+      {
+       "start": 1783755690476.8008,
+       "end": 1783757160905.7412,
+       "durationMs": 1470428.9404296875,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      },
+      {
+       "start": 1783765217560.1272,
+       "end": 1783766103210.4485,
+       "durationMs": 885650.3212890625,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      }
+     ],
+     "eventCount": 24,
+     "userMessages": 12,
+     "assistantMessages": 12,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-131.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-150",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1783578775171.1267,
+     "lastEvent": 1783581035559.251,
+     "activeMs": 2260388.124267578,
+     "spanMs": 2260388.124267578,
+     "blocks": [
+      {
+       "start": 1783578775171.1267,
+       "end": 1783581035559.251,
+       "durationMs": 2260388.124267578,
+       "eventCount": 22,
+       "userMessages": 11,
+       "assistantMessages": 11
+      }
+     ],
+     "eventCount": 22,
+     "userMessages": 11,
+     "assistantMessages": 11,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-150.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-162",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1783508793882.8486,
+     "lastEvent": 1783509600964.7825,
+     "activeMs": 807081.9338378906,
+     "spanMs": 807081.9338378906,
+     "blocks": [
+      {
+       "start": 1783508793882.8486,
+       "end": 1783509600964.7825,
+       "durationMs": 807081.9338378906,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      }
+     ],
+     "eventCount": 10,
+     "userMessages": 5,
+     "assistantMessages": 5,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-162.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-210",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1783054409996.6426,
+     "lastEvent": 1783071019883.2786,
+     "activeMs": 6718897.8916015625,
+     "spanMs": 16609886.635986328,
+     "blocks": [
+      {
+       "start": 1783054409996.6426,
+       "end": 1783057624760.9355,
+       "durationMs": 3214764.29296875,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      },
+      {
+       "start": 1783067515749.68,
+       "end": 1783071019883.2786,
+       "durationMs": 3504133.5986328125,
+       "eventCount": 36,
+       "userMessages": 18,
+       "assistantMessages": 18
+      }
+     ],
+     "eventCount": 74,
+     "userMessages": 37,
+     "assistantMessages": 37,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-210.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-240",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1782800611751.1292,
+     "lastEvent": 1782810219959.251,
+     "activeMs": 2601066.9416503906,
+     "spanMs": 9608208.121826172,
+     "blocks": [
+      {
+       "start": 1782800611751.1292,
+       "end": 1782801165181.6477,
+       "durationMs": 553430.5185546875,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      },
+      {
+       "start": 1782808172322.828,
+       "end": 1782810219959.251,
+       "durationMs": 2047636.4230957031,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      }
+     ],
+     "eventCount": 30,
+     "userMessages": 15,
+     "assistantMessages": 15,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-240.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-341",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1781923585557.0215,
+     "lastEvent": 1781930307993.829,
+     "activeMs": 4101780.4650878906,
+     "spanMs": 6722436.8076171875,
+     "blocks": [
+      {
+       "start": 1781923585557.0215,
+       "end": 1781926576330.557,
+       "durationMs": 2990773.5354003906,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      },
+      {
+       "start": 1781929196986.8994,
+       "end": 1781930307993.829,
+       "durationMs": 1111006.9296875,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      }
+     ],
+     "eventCount": 48,
+     "userMessages": 24,
+     "assistantMessages": 24,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-341.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-370",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1781682556682.4932,
+     "lastEvent": 1781683298096.6316,
+     "activeMs": 741414.1384277344,
+     "spanMs": 741414.1384277344,
+     "blocks": [
+      {
+       "start": 1781682556682.4932,
+       "end": 1781683298096.6316,
+       "durationMs": 741414.1384277344,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      }
+     ],
+     "eventCount": 12,
+     "userMessages": 6,
+     "assistantMessages": 6,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-370.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-381",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1781599542257.1558,
+     "lastEvent": 1781601570932.6245,
+     "activeMs": 2028675.46875,
+     "spanMs": 2028675.46875,
+     "blocks": [
+      {
+       "start": 1781599542257.1558,
+       "end": 1781601570932.6245,
+       "durationMs": 2028675.46875,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      }
+     ],
+     "eventCount": 24,
+     "userMessages": 12,
+     "assistantMessages": 12,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-381.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-380",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1781571920157.6133,
+     "lastEvent": 1781574569334.703,
+     "activeMs": 2649177.0895996094,
+     "spanMs": 2649177.0895996094,
+     "blocks": [
+      {
+       "start": 1781571920157.6133,
+       "end": 1781574569334.703,
+       "durationMs": 2649177.0895996094,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      }
+     ],
+     "eventCount": 28,
+     "userMessages": 14,
+     "assistantMessages": 14,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-380.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-420",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1781259807087.5186,
+     "lastEvent": 1781283326624.8413,
+     "activeMs": 6244912.987792969,
+     "spanMs": 23519537.322753906,
+     "blocks": [
+      {
+       "start": 1781259807087.5186,
+       "end": 1781261602728.6797,
+       "durationMs": 1795641.1611328125,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      },
+      {
+       "start": 1781271053452.7163,
+       "end": 1781274488349.725,
+       "durationMs": 3434897.0087890625,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      },
+      {
+       "start": 1781282312250.0234,
+       "end": 1781283326624.8413,
+       "durationMs": 1014374.8178710938,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      }
+     ],
+     "eventCount": 70,
+     "userMessages": 35,
+     "assistantMessages": 35,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-420.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-462",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1780911824996.5566,
+     "lastEvent": 1780936532179.4197,
+     "activeMs": 10252988.756103516,
+     "spanMs": 24707182.86303711,
+     "blocks": [
+      {
+       "start": 1780911824996.5566,
+       "end": 1780915355567.8264,
+       "durationMs": 3530571.2697753906,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      },
+      {
+       "start": 1780919985717.21,
+       "end": 1780922854995.4822,
+       "durationMs": 2869278.272216797,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      },
+      {
+       "start": 1780932679040.2056,
+       "end": 1780936532179.4197,
+       "durationMs": 3853139.214111328,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      }
+     ],
+     "eventCount": 106,
+     "userMessages": 53,
+     "assistantMessages": 53,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-462.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-461",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1780898538375.0815,
+     "lastEvent": 1780913036244.5776,
+     "activeMs": 4583067.134277344,
+     "spanMs": 14497869.49609375,
+     "blocks": [
+      {
+       "start": 1780898538375.0815,
+       "end": 1780900766458.1238,
+       "durationMs": 2228083.042236328,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1780910681260.4856,
+       "end": 1780913036244.5776,
+       "durationMs": 2354984.0920410156,
+       "eventCount": 26,
+       "userMessages": 13,
+       "assistantMessages": 13
+      }
+     ],
+     "eventCount": 54,
+     "userMessages": 27,
+     "assistantMessages": 27,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-461.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-470",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1780829270746.233,
+     "lastEvent": 1780835388317.8286,
+     "activeMs": 3263661.2736816406,
+     "spanMs": 6117571.595703125,
+     "blocks": [
+      {
+       "start": 1780829270746.233,
+       "end": 1780829562980.6282,
+       "durationMs": 292234.3952636719,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      },
+      {
+       "start": 1780832416890.9502,
+       "end": 1780835388317.8286,
+       "durationMs": 2971426.8784179688,
+       "eventCount": 36,
+       "userMessages": 18,
+       "assistantMessages": 18
+      }
+     ],
+     "eventCount": 42,
+     "userMessages": 21,
+     "assistantMessages": 21,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-470.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-610",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1779610191931.9053,
+     "lastEvent": 1779620689692.1636,
+     "activeMs": 5976999.726806641,
+     "spanMs": 10497760.258300781,
+     "blocks": [
+      {
+       "start": 1779610191931.9053,
+       "end": 1779613830407.0833,
+       "durationMs": 3638475.1779785156,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      },
+      {
+       "start": 1779618351167.6147,
+       "end": 1779620689692.1636,
+       "durationMs": 2338524.548828125,
+       "eventCount": 26,
+       "userMessages": 13,
+       "assistantMessages": 13
+      }
+     ],
+     "eventCount": 66,
+     "userMessages": 33,
+     "assistantMessages": 33,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-610.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-661",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1779169817048.0747,
+     "lastEvent": 1779191873827.8865,
+     "activeMs": 6827225.7314453125,
+     "spanMs": 22056779.811767578,
+     "blocks": [
+      {
+       "start": 1779169817048.0747,
+       "end": 1779171791392.4983,
+       "durationMs": 1974344.4235839844,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      },
+      {
+       "start": 1779176127580.2495,
+       "end": 1779177986465.034,
+       "durationMs": 1858884.7844238281,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      },
+      {
+       "start": 1779188879831.363,
+       "end": 1779191873827.8865,
+       "durationMs": 2993996.5234375,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      }
+     ],
+     "eventCount": 76,
+     "userMessages": 38,
+     "assistantMessages": 38,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-661.jsonl"
+    },
+    {
+     "sessionId": "demo-api-gateway-722",
+     "projectPath": "/home/demo/projects/api-gateway",
+     "projectName": "api-gateway",
+     "firstEvent": 1778645256503.2024,
+     "lastEvent": 1778647866009.3345,
+     "activeMs": 2609506.132080078,
+     "spanMs": 2609506.132080078,
+     "blocks": [
+      {
+       "start": 1778645256503.2024,
+       "end": 1778647866009.3345,
+       "durationMs": 2609506.132080078,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      }
+     ],
+     "eventCount": 28,
+     "userMessages": 14,
+     "assistantMessages": 14,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-api-gateway-722.jsonl"
+    }
+   ]
+  },
+  {
+   "projectPath": "/home/demo/projects/marketing-site",
+   "projectName": "marketing-site",
+   "activeMs": 65369025.90209961,
+   "sessionCount": 17,
+   "firstEvent": 1778493755930.5686,
+   "lastEvent": 1784791283031.4255,
+   "sessions": [
+    {
+     "sessionId": "demo-marketing-site-10",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1784772371386.6252,
+     "lastEvent": 1784791283031.4255,
+     "activeMs": 6961605.58984375,
+     "spanMs": 18911644.80029297,
+     "blocks": [
+      {
+       "start": 1784772371386.6252,
+       "end": 1784774692673.8906,
+       "durationMs": 2321287.2653808594,
+       "eventCount": 22,
+       "userMessages": 11,
+       "assistantMessages": 11
+      },
+      {
+       "start": 1784781133920.0737,
+       "end": 1784782324216.3965,
+       "durationMs": 1190296.3227539062,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      },
+      {
+       "start": 1784787833009.4238,
+       "end": 1784791283031.4255,
+       "durationMs": 3450022.0017089844,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      }
+     ],
+     "eventCount": 72,
+     "userMessages": 36,
+     "assistantMessages": 36,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-10.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-20",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1784683995844.8428,
+     "lastEvent": 1784695079633.7383,
+     "activeMs": 1537350.1496582031,
+     "spanMs": 11083788.895507812,
+     "blocks": [
+      {
+       "start": 1784683995844.8428,
+       "end": 1784684351183.6501,
+       "durationMs": 355338.8073730469,
+       "eventCount": 8,
+       "userMessages": 4,
+       "assistantMessages": 4
+      },
+      {
+       "start": 1784693897622.396,
+       "end": 1784695079633.7383,
+       "durationMs": 1182011.3422851562,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      }
+     ],
+     "eventCount": 20,
+     "userMessages": 10,
+     "assistantMessages": 10,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-20.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-130",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1783760132639.3623,
+     "lastEvent": 1783771111734.9514,
+     "activeMs": 1878210.1428222656,
+     "spanMs": 10979095.589111328,
+     "blocks": [
+      {
+       "start": 1783760132639.3623,
+       "end": 1783761700203.1494,
+       "durationMs": 1567563.787109375,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1783770801088.5957,
+       "end": 1783771111734.9514,
+       "durationMs": 310646.3557128906,
+       "eventCount": 8,
+       "userMessages": 4,
+       "assistantMessages": 4
+      }
+     ],
+     "eventCount": 24,
+     "userMessages": 12,
+     "assistantMessages": 12,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-130.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-161",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1783472152026.3691,
+     "lastEvent": 1783485486580.2988,
+     "activeMs": 4852373.458251953,
+     "spanMs": 13334553.9296875,
+     "blocks": [
+      {
+       "start": 1783472152026.3691,
+       "end": 1783474390787.227,
+       "durationMs": 2238760.8579101562,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      },
+      {
+       "start": 1783482872967.6985,
+       "end": 1783485486580.2988,
+       "durationMs": 2613612.600341797,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      }
+     ],
+     "eventCount": 52,
+     "userMessages": 26,
+     "assistantMessages": 26,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-161.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-300",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1782280102679.9697,
+     "lastEvent": 1782297296778.1562,
+     "activeMs": 7754567.525634766,
+     "spanMs": 17194098.186523438,
+     "blocks": [
+      {
+       "start": 1782280102679.9697,
+       "end": 1782283794446.8582,
+       "durationMs": 3691766.8884277344,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      },
+      {
+       "start": 1782286307772.5505,
+       "end": 1782289773270.7446,
+       "durationMs": 3465498.194091797,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      },
+      {
+       "start": 1782296699475.7131,
+       "end": 1782297296778.1562,
+       "durationMs": 597302.4431152344,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      }
+     ],
+     "eventCount": 82,
+     "userMessages": 41,
+     "assistantMessages": 41,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-300.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-321",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1782088463085.0334,
+     "lastEvent": 1782107528768.0298,
+     "activeMs": 3545131.77734375,
+     "spanMs": 19065682.99633789,
+     "blocks": [
+      {
+       "start": 1782088463085.0334,
+       "end": 1782089632625.0718,
+       "durationMs": 1169540.0383300781,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      },
+      {
+       "start": 1782097883404.0044,
+       "end": 1782098819014.6458,
+       "durationMs": 935610.6413574219,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      },
+      {
+       "start": 1782106088786.9321,
+       "end": 1782107528768.0298,
+       "durationMs": 1439981.09765625,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      }
+     ],
+     "eventCount": 40,
+     "userMessages": 20,
+     "assistantMessages": 20,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-321.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-332",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1782036599137.0696,
+     "lastEvent": 1782054558024.9812,
+     "activeMs": 9314729.641113281,
+     "spanMs": 17958887.911621094,
+     "blocks": [
+      {
+       "start": 1782036599137.0696,
+       "end": 1782040849941.819,
+       "durationMs": 4250804.749511719,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      },
+      {
+       "start": 1782046178770.4949,
+       "end": 1782049120539.8472,
+       "durationMs": 2941769.352294922,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      },
+      {
+       "start": 1782052435869.442,
+       "end": 1782054558024.9812,
+       "durationMs": 2122155.5393066406,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      }
+     ],
+     "eventCount": 92,
+     "userMessages": 46,
+     "assistantMessages": 46,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-332.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-400",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1781426927981.9985,
+     "lastEvent": 1781430964306.2175,
+     "activeMs": 4036324.2189941406,
+     "spanMs": 4036324.2189941406,
+     "blocks": [
+      {
+       "start": 1781426927981.9985,
+       "end": 1781430964306.2175,
+       "durationMs": 4036324.2189941406,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      }
+     ],
+     "eventCount": 40,
+     "userMessages": 20,
+     "assistantMessages": 20,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-400.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-491",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1780656309407.2837,
+     "lastEvent": 1780658634983.4353,
+     "activeMs": 2325576.151611328,
+     "spanMs": 2325576.151611328,
+     "blocks": [
+      {
+       "start": 1780656309407.2837,
+       "end": 1780658634983.4353,
+       "durationMs": 2325576.151611328,
+       "eventCount": 30,
+       "userMessages": 15,
+       "assistantMessages": 15
+      }
+     ],
+     "eventCount": 30,
+     "userMessages": 15,
+     "assistantMessages": 15,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-491.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-550",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1780107395565.4163,
+     "lastEvent": 1780110813361.3115,
+     "activeMs": 3417795.895263672,
+     "spanMs": 3417795.895263672,
+     "blocks": [
+      {
+       "start": 1780107395565.4163,
+       "end": 1780110813361.3115,
+       "durationMs": 3417795.895263672,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      }
+     ],
+     "eventCount": 40,
+     "userMessages": 20,
+     "assistantMessages": 20,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-550.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-601",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1779671093753.626,
+     "lastEvent": 1779680216813.2673,
+     "activeMs": 3143338.7944335938,
+     "spanMs": 9123059.641357422,
+     "blocks": [
+      {
+       "start": 1779671093753.626,
+       "end": 1779672748903.106,
+       "durationMs": 1655149.4799804688,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1779678728623.953,
+       "end": 1779680216813.2673,
+       "durationMs": 1488189.314453125,
+       "eventCount": 18,
+       "userMessages": 9,
+       "assistantMessages": 9
+      }
+     ],
+     "eventCount": 34,
+     "userMessages": 17,
+     "assistantMessages": 17,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-601.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-602",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1779670071436.741,
+     "lastEvent": 1779673575941.7996,
+     "activeMs": 3504505.05859375,
+     "spanMs": 3504505.05859375,
+     "blocks": [
+      {
+       "start": 1779670071436.741,
+       "end": 1779673575941.7996,
+       "durationMs": 3504505.05859375,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      }
+     ],
+     "eventCount": 34,
+     "userMessages": 17,
+     "assistantMessages": 17,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-602.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-611",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1779610207084.133,
+     "lastEvent": 1779625006319.4744,
+     "activeMs": 3907241.132080078,
+     "spanMs": 14799235.341308594,
+     "blocks": [
+      {
+       "start": 1779610207084.133,
+       "end": 1779611452683.6782,
+       "durationMs": 1245599.5451660156,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1779622344677.8875,
+       "end": 1779625006319.4744,
+       "durationMs": 2661641.5869140625,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      }
+     ],
+     "eventCount": 44,
+     "userMessages": 22,
+     "assistantMessages": 22,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-611.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-640",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1779360924640.3713,
+     "lastEvent": 1779372607572.0344,
+     "activeMs": 5822297.650878906,
+     "spanMs": 11682931.663085938,
+     "blocks": [
+      {
+       "start": 1779360924640.3713,
+       "end": 1779365851779.328,
+       "durationMs": 4927138.956542969,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      },
+      {
+       "start": 1779371712413.34,
+       "end": 1779372607572.0344,
+       "durationMs": 895158.6943359375,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      }
+     ],
+     "eventCount": 54,
+     "userMessages": 27,
+     "assistantMessages": 27,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-640.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-721",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1778657869907.381,
+     "lastEvent": 1778668133075.4863,
+     "activeMs": 2021411.2563476562,
+     "spanMs": 10263168.10522461,
+     "blocks": [
+      {
+       "start": 1778657869907.381,
+       "end": 1778658126579.7102,
+       "durationMs": 256672.3291015625,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      },
+      {
+       "start": 1778666368336.559,
+       "end": 1778668133075.4863,
+       "durationMs": 1764738.9272460938,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      }
+     ],
+     "eventCount": 26,
+     "userMessages": 13,
+     "assistantMessages": 13,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-721.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-730",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1778555474814.846,
+     "lastEvent": 1778556029607.2773,
+     "activeMs": 554792.4313964844,
+     "spanMs": 554792.4313964844,
+     "blocks": [
+      {
+       "start": 1778555474814.846,
+       "end": 1778556029607.2773,
+       "durationMs": 554792.4313964844,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      }
+     ],
+     "eventCount": 12,
+     "userMessages": 6,
+     "assistantMessages": 6,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-730.jsonl"
+    },
+    {
+     "sessionId": "demo-marketing-site-740",
+     "projectPath": "/home/demo/projects/marketing-site",
+     "projectName": "marketing-site",
+     "firstEvent": 1778493755930.5686,
+     "lastEvent": 1778494547705.5964,
+     "activeMs": 791775.0278320312,
+     "spanMs": 791775.0278320312,
+     "blocks": [
+      {
+       "start": 1778493755930.5686,
+       "end": 1778494547705.5964,
+       "durationMs": 791775.0278320312,
+       "eventCount": 8,
+       "userMessages": 4,
+       "assistantMessages": 4
+      }
+     ],
+     "eventCount": 8,
+     "userMessages": 4,
+     "assistantMessages": 4,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-marketing-site-740.jsonl"
+    }
+   ]
+  },
+  {
+   "projectPath": "/home/demo/projects/storefront",
+   "projectName": "storefront",
+   "activeMs": 62482474.39038086,
+   "sessionCount": 15,
+   "firstEvent": 1779328074408.3735,
+   "lastEvent": 1784871926145.635,
+   "sessions": [
+    {
+     "sessionId": "demo-storefront-1",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1784868011728.3245,
+     "lastEvent": 1784871926145.635,
+     "activeMs": 3914417.310546875,
+     "spanMs": 3914417.310546875,
+     "blocks": [
+      {
+       "start": 1784868011728.3245,
+       "end": 1784871926145.635,
+       "durationMs": 3914417.310546875,
+       "eventCount": 36,
+       "userMessages": 18,
+       "assistantMessages": 18
+      }
+     ],
+     "eventCount": 36,
+     "userMessages": 18,
+     "assistantMessages": 18,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-1.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-80",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1784189212948.205,
+     "lastEvent": 1784206273024.9897,
+     "activeMs": 8319960.305419922,
+     "spanMs": 17060076.78466797,
+     "blocks": [
+      {
+       "start": 1784189212948.205,
+       "end": 1784191423949.6257,
+       "durationMs": 2211001.420654297,
+       "eventCount": 26,
+       "userMessages": 13,
+       "assistantMessages": 13
+      },
+      {
+       "start": 1784195719607.4463,
+       "end": 1784199094733.943,
+       "durationMs": 3375126.496826172,
+       "eventCount": 36,
+       "userMessages": 18,
+       "assistantMessages": 18
+      },
+      {
+       "start": 1784203539192.6018,
+       "end": 1784206273024.9897,
+       "durationMs": 2733832.387939453,
+       "eventCount": 30,
+       "userMessages": 15,
+       "assistantMessages": 15
+      }
+     ],
+     "eventCount": 92,
+     "userMessages": 46,
+     "assistantMessages": 46,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-80.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-112",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1783917468595.7407,
+     "lastEvent": 1783929651190.7036,
+     "activeMs": 2565718.162841797,
+     "spanMs": 12182594.962890625,
+     "blocks": [
+      {
+       "start": 1783917468595.7407,
+       "end": 1783919112316.8196,
+       "durationMs": 1643721.0788574219,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1783928729193.6196,
+       "end": 1783929651190.7036,
+       "durationMs": 921997.083984375,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      }
+     ],
+     "eventCount": 26,
+     "userMessages": 13,
+     "assistantMessages": 13,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-112.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-160",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1783490639204.2537,
+     "lastEvent": 1783503542239.315,
+     "activeMs": 5507203.314208984,
+     "spanMs": 12903035.061279297,
+     "blocks": [
+      {
+       "start": 1783490639204.2537,
+       "end": 1783494334607.243,
+       "durationMs": 3695402.9892578125,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      },
+      {
+       "start": 1783501730438.99,
+       "end": 1783503542239.315,
+       "durationMs": 1811800.3249511719,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      }
+     ],
+     "eventCount": 52,
+     "userMessages": 26,
+     "assistantMessages": 26,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-160.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-171",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1783408440767.5166,
+     "lastEvent": 1783424205412.3347,
+     "activeMs": 5818348.779541016,
+     "spanMs": 15764644.818115234,
+     "blocks": [
+      {
+       "start": 1783408440767.5166,
+       "end": 1783410036679.2664,
+       "durationMs": 1595911.7497558594,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      },
+      {
+       "start": 1783417335641.7473,
+       "end": 1783420357163.8438,
+       "durationMs": 3021522.096435547,
+       "eventCount": 30,
+       "userMessages": 15,
+       "assistantMessages": 15
+      },
+      {
+       "start": 1783423004497.4014,
+       "end": 1783424205412.3347,
+       "durationMs": 1200914.9333496094,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      }
+     ],
+     "eventCount": 66,
+     "userMessages": 33,
+     "assistantMessages": 33,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-171.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-190",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1783240170484.5283,
+     "lastEvent": 1783258687557.091,
+     "activeMs": 8178412.877685547,
+     "spanMs": 18517072.56274414,
+     "blocks": [
+      {
+       "start": 1783240170484.5283,
+       "end": 1783243317183.1965,
+       "durationMs": 3146698.6682128906,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      },
+      {
+       "start": 1783245961437.8105,
+       "end": 1783247750993.4546,
+       "durationMs": 1789555.6440429688,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      },
+      {
+       "start": 1783255445398.5256,
+       "end": 1783258687557.091,
+       "durationMs": 3242158.5654296875,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      }
+     ],
+     "eventCount": 86,
+     "userMessages": 43,
+     "assistantMessages": 43,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-190.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-301",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1782261167087.4854,
+     "lastEvent": 1782272673043.6987,
+     "activeMs": 3711332.986328125,
+     "spanMs": 11505956.213378906,
+     "blocks": [
+      {
+       "start": 1782261167087.4854,
+       "end": 1782262578052.3386,
+       "durationMs": 1410964.8532714844,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1782270372675.5657,
+       "end": 1782272673043.6987,
+       "durationMs": 2300368.1330566406,
+       "eventCount": 26,
+       "userMessages": 13,
+       "assistantMessages": 13
+      }
+     ],
+     "eventCount": 42,
+     "userMessages": 21,
+     "assistantMessages": 21,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-301.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-320",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1782096713253.0112,
+     "lastEvent": 1782099718221.2708,
+     "activeMs": 3004968.2595214844,
+     "spanMs": 3004968.2595214844,
+     "blocks": [
+      {
+       "start": 1782096713253.0112,
+       "end": 1782099718221.2708,
+       "durationMs": 3004968.2595214844,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      }
+     ],
+     "eventCount": 32,
+     "userMessages": 16,
+     "assistantMessages": 16,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-320.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-330",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1782013590000.3289,
+     "lastEvent": 1782025475433.546,
+     "activeMs": 1723585.1145019531,
+     "spanMs": 11885433.217041016,
+     "blocks": [
+      {
+       "start": 1782013590000.3289,
+       "end": 1782014081871.671,
+       "durationMs": 491871.3420410156,
+       "eventCount": 8,
+       "userMessages": 4,
+       "assistantMessages": 4
+      },
+      {
+       "start": 1782017785821.4358,
+       "end": 1782018597137.5793,
+       "durationMs": 811316.1435546875,
+       "eventCount": 8,
+       "userMessages": 4,
+       "assistantMessages": 4
+      },
+      {
+       "start": 1782025055035.917,
+       "end": 1782025475433.546,
+       "durationMs": 420397.62890625,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      }
+     ],
+     "eventCount": 22,
+     "userMessages": 11,
+     "assistantMessages": 11,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-330.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-490",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1780641300349.607,
+     "lastEvent": 1780641555156.109,
+     "activeMs": 254806.501953125,
+     "spanMs": 254806.501953125,
+     "blocks": [
+      {
+       "start": 1780641300349.607,
+       "end": 1780641555156.109,
+       "durationMs": 254806.501953125,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      }
+     ],
+     "eventCount": 6,
+     "userMessages": 3,
+     "assistantMessages": 3,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-490.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-561",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1780031097427.9304,
+     "lastEvent": 1780043426039.3833,
+     "activeMs": 4907315.296142578,
+     "spanMs": 12328611.45288086,
+     "blocks": [
+      {
+       "start": 1780031097427.9304,
+       "end": 1780033811514.721,
+       "durationMs": 2714086.7905273438,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1780041232810.8777,
+       "end": 1780043426039.3833,
+       "durationMs": 2193228.5056152344,
+       "eventCount": 22,
+       "userMessages": 11,
+       "assistantMessages": 11
+      }
+     ],
+     "eventCount": 50,
+     "userMessages": 25,
+     "assistantMessages": 25,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-561.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-560",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1780025562293.9487,
+     "lastEvent": 1780039006832.7627,
+     "activeMs": 6126155.691162109,
+     "spanMs": 13444538.813964844,
+     "blocks": [
+      {
+       "start": 1780025562293.9487,
+       "end": 1780028704972.0137,
+       "durationMs": 3142678.0649414062,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      },
+      {
+       "start": 1780036023355.1365,
+       "end": 1780039006832.7627,
+       "durationMs": 2983477.626220703,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      }
+     ],
+     "eventCount": 68,
+     "userMessages": 34,
+     "assistantMessages": 34,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-560.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-600",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1779687496450.414,
+     "lastEvent": 1779694751471.9214,
+     "activeMs": 4127761.8911132812,
+     "spanMs": 7255021.507324219,
+     "blocks": [
+      {
+       "start": 1779687496450.414,
+       "end": 1779690096307.4878,
+       "durationMs": 2599857.0737304688,
+       "eventCount": 30,
+       "userMessages": 15,
+       "assistantMessages": 15
+      },
+      {
+       "start": 1779693223567.104,
+       "end": 1779694751471.9214,
+       "durationMs": 1527904.8173828125,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      }
+     ],
+     "eventCount": 44,
+     "userMessages": 22,
+     "assistantMessages": 22,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-600.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-642",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1779340894508.018,
+     "lastEvent": 1779344458646.5886,
+     "activeMs": 3564138.5705566406,
+     "spanMs": 3564138.5705566406,
+     "blocks": [
+      {
+       "start": 1779340894508.018,
+       "end": 1779344458646.5886,
+       "durationMs": 3564138.5705566406,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      }
+     ],
+     "eventCount": 38,
+     "userMessages": 19,
+     "assistantMessages": 19,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-642.jsonl"
+    },
+    {
+     "sessionId": "demo-storefront-641",
+     "projectPath": "/home/demo/projects/storefront",
+     "projectName": "storefront",
+     "firstEvent": 1779328074408.3735,
+     "lastEvent": 1779328832757.7024,
+     "activeMs": 758349.3288574219,
+     "spanMs": 758349.3288574219,
+     "blocks": [
+      {
+       "start": 1779328074408.3735,
+       "end": 1779328832757.7024,
+       "durationMs": 758349.3288574219,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      }
+     ],
+     "eventCount": 10,
+     "userMessages": 5,
+     "assistantMessages": 5,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-storefront-641.jsonl"
+    }
+   ]
+  },
+  {
+   "projectPath": "/home/demo/projects/data-pipeline",
+   "projectName": "data-pipeline",
+   "activeMs": 61920515.25854492,
+   "sessionCount": 13,
+   "firstEvent": 1778411676568.4624,
+   "lastEvent": 1784778199531.0867,
+   "sessions": [
+    {
+     "sessionId": "demo-data-pipeline-11",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1784778014747.097,
+     "lastEvent": 1784778199531.0867,
+     "activeMs": 184783.98974609375,
+     "spanMs": 184783.98974609375,
+     "blocks": [
+      {
+       "start": 1784778014747.097,
+       "end": 1784778199531.0867,
+       "durationMs": 184783.98974609375,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      }
+     ],
+     "eventCount": 6,
+     "userMessages": 3,
+     "assistantMessages": 3,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-11.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-71",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1784268279550.7927,
+     "lastEvent": 1784271976300.1743,
+     "activeMs": 3696749.381591797,
+     "spanMs": 3696749.381591797,
+     "blocks": [
+      {
+       "start": 1784268279550.7927,
+       "end": 1784271976300.1743,
+       "durationMs": 3696749.381591797,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      }
+     ],
+     "eventCount": 38,
+     "userMessages": 19,
+     "assistantMessages": 19,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-71.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-132",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1783767352095.8918,
+     "lastEvent": 1783768806977.2092,
+     "activeMs": 1454881.3173828125,
+     "spanMs": 1454881.3173828125,
+     "blocks": [
+      {
+       "start": 1783767352095.8918,
+       "end": 1783768806977.2092,
+       "durationMs": 1454881.3173828125,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      }
+     ],
+     "eventCount": 14,
+     "userMessages": 7,
+     "assistantMessages": 7,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-132.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-151",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1783562863817.6936,
+     "lastEvent": 1783576287276.687,
+     "activeMs": 3110129.635498047,
+     "spanMs": 13423458.993408203,
+     "blocks": [
+      {
+       "start": 1783562863817.6936,
+       "end": 1783565307059.8752,
+       "durationMs": 2443242.181640625,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1783575620389.2332,
+       "end": 1783576287276.687,
+       "durationMs": 666887.4538574219,
+       "eventCount": 10,
+       "userMessages": 5,
+       "assistantMessages": 5
+      }
+     ],
+     "eventCount": 38,
+     "userMessages": 19,
+     "assistantMessages": 19,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-151.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-220",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1782952960267.8794,
+     "lastEvent": 1782970979793.8025,
+     "activeMs": 7798433.297363281,
+     "spanMs": 18019525.923095703,
+     "blocks": [
+      {
+       "start": 1782952960267.8794,
+       "end": 1782954121757.4456,
+       "durationMs": 1161489.5661621094,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      },
+      {
+       "start": 1782962007141.6367,
+       "end": 1782965083183.3552,
+       "durationMs": 3076041.7185058594,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      },
+      {
+       "start": 1782967418891.7898,
+       "end": 1782970979793.8025,
+       "durationMs": 3560902.0126953125,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      }
+     ],
+     "eventCount": 84,
+     "userMessages": 42,
+     "assistantMessages": 42,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-220.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-261",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1782621882373.621,
+     "lastEvent": 1782645036731.8054,
+     "activeMs": 7821920.243408203,
+     "spanMs": 23154358.184326172,
+     "blocks": [
+      {
+       "start": 1782621882373.621,
+       "end": 1782623615195.0237,
+       "durationMs": 1732821.4025878906,
+       "eventCount": 20,
+       "userMessages": 10,
+       "assistantMessages": 10
+      },
+      {
+       "start": 1782634460536.606,
+       "end": 1782635767359.2546,
+       "durationMs": 1306822.6486816406,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1782640254455.6133,
+       "end": 1782645036731.8054,
+       "durationMs": 4782276.192138672,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      }
+     ],
+     "eventCount": 76,
+     "userMessages": 38,
+     "assistantMessages": 38,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-261.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-271",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1782550246409.895,
+     "lastEvent": 1782565511620.8914,
+     "activeMs": 7378757.730224609,
+     "spanMs": 15265210.99633789,
+     "blocks": [
+      {
+       "start": 1782550246409.895,
+       "end": 1782554241095.928,
+       "durationMs": 3994686.0329589844,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      },
+      {
+       "start": 1782562127549.194,
+       "end": 1782565511620.8914,
+       "durationMs": 3384071.697265625,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      }
+     ],
+     "eventCount": 66,
+     "userMessages": 33,
+     "assistantMessages": 33,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-271.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-280",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1782470103747.7512,
+     "lastEvent": 1782481860525.5845,
+     "activeMs": 5686175.027832031,
+     "spanMs": 11756777.833251953,
+     "blocks": [
+      {
+       "start": 1782470103747.7512,
+       "end": 1782472865868.2273,
+       "durationMs": 2762120.4760742188,
+       "eventCount": 30,
+       "userMessages": 15,
+       "assistantMessages": 15
+      },
+      {
+       "start": 1782478936471.0327,
+       "end": 1782481860525.5845,
+       "durationMs": 2924054.5517578125,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      }
+     ],
+     "eventCount": 58,
+     "userMessages": 29,
+     "assistantMessages": 29,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-280.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-281",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1782463454375.6504,
+     "lastEvent": 1782465714532.7637,
+     "activeMs": 2260157.11328125,
+     "spanMs": 2260157.11328125,
+     "blocks": [
+      {
+       "start": 1782463454375.6504,
+       "end": 1782465714532.7637,
+       "durationMs": 2260157.11328125,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      }
+     ],
+     "eventCount": 24,
+     "userMessages": 12,
+     "assistantMessages": 12,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-281.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-340",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1781946888679.1726,
+     "lastEvent": 1781955713314.4531,
+     "activeMs": 5878956.824707031,
+     "spanMs": 8824635.280517578,
+     "blocks": [
+      {
+       "start": 1781946888679.1726,
+       "end": 1781949538188.3616,
+       "durationMs": 2649509.1889648438,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1781952483866.8174,
+       "end": 1781955713314.4531,
+       "durationMs": 3229447.6357421875,
+       "eventCount": 32,
+       "userMessages": 16,
+       "assistantMessages": 16
+      }
+     ],
+     "eventCount": 60,
+     "userMessages": 30,
+     "assistantMessages": 30,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-340.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-440",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1781077064719.345,
+     "lastEvent": 1781098121745.1494,
+     "activeMs": 8215990.984375,
+     "spanMs": 21057025.80444336,
+     "blocks": [
+      {
+       "start": 1781077064719.345,
+       "end": 1781080255809.4143,
+       "durationMs": 3191090.0693359375,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      },
+      {
+       "start": 1781085814226.6702,
+       "end": 1781088720231.287,
+       "durationMs": 2906004.6169433594,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1781096002848.8513,
+       "end": 1781098121745.1494,
+       "durationMs": 2118896.298095703,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      }
+     ],
+     "eventCount": 90,
+     "userMessages": 45,
+     "assistantMessages": 45,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-440.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-670",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1779064463538.2195,
+     "lastEvent": 1779075048341.6528,
+     "activeMs": 3409060.4899902344,
+     "spanMs": 10584803.43334961,
+     "blocks": [
+      {
+       "start": 1779064463538.2195,
+       "end": 1779065691904.5974,
+       "durationMs": 1228366.3779296875,
+       "eventCount": 12,
+       "userMessages": 6,
+       "assistantMessages": 6
+      },
+      {
+       "start": 1779072867647.5408,
+       "end": 1779075048341.6528,
+       "durationMs": 2180694.112060547,
+       "eventCount": 18,
+       "userMessages": 9,
+       "assistantMessages": 9
+      }
+     ],
+     "eventCount": 30,
+     "userMessages": 15,
+     "assistantMessages": 15,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-670.jsonl"
+    },
+    {
+     "sessionId": "demo-data-pipeline-751",
+     "projectPath": "/home/demo/projects/data-pipeline",
+     "projectName": "data-pipeline",
+     "firstEvent": 1778411676568.4624,
+     "lastEvent": 1778421286896.7566,
+     "activeMs": 5024519.223144531,
+     "spanMs": 9610328.294189453,
+     "blocks": [
+      {
+       "start": 1778411676568.4624,
+       "end": 1778413025589.7817,
+       "durationMs": 1349021.3193359375,
+       "eventCount": 18,
+       "userMessages": 9,
+       "assistantMessages": 9
+      },
+      {
+       "start": 1778417611398.8528,
+       "end": 1778421286896.7566,
+       "durationMs": 3675497.9038085938,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      }
+     ],
+     "eventCount": 58,
+     "userMessages": 29,
+     "assistantMessages": 29,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-data-pipeline-751.jsonl"
+    }
+   ]
+  },
+  {
+   "projectPath": "/home/demo/projects/infra",
+   "projectName": "infra",
+   "activeMs": 59549608.53222656,
+   "sessionCount": 14,
+   "firstEvent": 1778399973945.4766,
+   "lastEvent": 1783954119771.399,
+   "sessions": [
+    {
+     "sessionId": "demo-infra-110",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1783938743914.7014,
+     "lastEvent": 1783954119771.399,
+     "activeMs": 5920336.87109375,
+     "spanMs": 15375856.697509766,
+     "blocks": [
+      {
+       "start": 1783938743914.7014,
+       "end": 1783941124603.1477,
+       "durationMs": 2380688.4462890625,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      },
+      {
+       "start": 1783950580122.974,
+       "end": 1783954119771.399,
+       "durationMs": 3539648.4248046875,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      }
+     ],
+     "eventCount": 62,
+     "userMessages": 31,
+     "assistantMessages": 31,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-110.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-211",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1783066166066.0762,
+     "lastEvent": 1783067846339.0361,
+     "activeMs": 1680272.9599609375,
+     "spanMs": 1680272.9599609375,
+     "blocks": [
+      {
+       "start": 1783066166066.0762,
+       "end": 1783067846339.0361,
+       "durationMs": 1680272.9599609375,
+       "eventCount": 18,
+       "userMessages": 9,
+       "assistantMessages": 9
+      }
+     ],
+     "eventCount": 18,
+     "userMessages": 9,
+     "assistantMessages": 9,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-211.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-260",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1782642197249.6052,
+     "lastEvent": 1782642578012.1182,
+     "activeMs": 380762.5129394531,
+     "spanMs": 380762.5129394531,
+     "blocks": [
+      {
+       "start": 1782642197249.6052,
+       "end": 1782642578012.1182,
+       "durationMs": 380762.5129394531,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      }
+     ],
+     "eventCount": 6,
+     "userMessages": 3,
+     "assistantMessages": 3,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-260.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-322",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1782102552771.0457,
+     "lastEvent": 1782117433976.5842,
+     "activeMs": 4111005.699951172,
+     "spanMs": 14881205.538574219,
+     "blocks": [
+      {
+       "start": 1782102552771.0457,
+       "end": 1782103841992.396,
+       "durationMs": 1289221.3503417969,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1782114612192.2346,
+       "end": 1782117433976.5842,
+       "durationMs": 2821784.349609375,
+       "eventCount": 26,
+       "userMessages": 13,
+       "assistantMessages": 13
+      }
+     ],
+     "eventCount": 42,
+     "userMessages": 21,
+     "assistantMessages": 21,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-322.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-331",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1782011031405.3555,
+     "lastEvent": 1782027058915.0137,
+     "activeMs": 6254370.426513672,
+     "spanMs": 16027509.658203125,
+     "blocks": [
+      {
+       "start": 1782011031405.3555,
+       "end": 1782013630679.3257,
+       "durationMs": 2599273.9702148438,
+       "eventCount": 30,
+       "userMessages": 15,
+       "assistantMessages": 15
+      },
+      {
+       "start": 1782016648822.2087,
+       "end": 1782017802170.2754,
+       "durationMs": 1153348.0666503906,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1782024557166.624,
+       "end": 1782027058915.0137,
+       "durationMs": 2501748.3896484375,
+       "eventCount": 30,
+       "userMessages": 15,
+       "assistantMessages": 15
+      }
+     ],
+     "eventCount": 76,
+     "userMessages": 38,
+     "assistantMessages": 38,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-331.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-342",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1781918709580.9478,
+     "lastEvent": 1781921033726.2234,
+     "activeMs": 2324145.2756347656,
+     "spanMs": 2324145.2756347656,
+     "blocks": [
+      {
+       "start": 1781918709580.9478,
+       "end": 1781921033726.2234,
+       "durationMs": 2324145.2756347656,
+       "eventCount": 22,
+       "userMessages": 11,
+       "assistantMessages": 11
+      }
+     ],
+     "eventCount": 22,
+     "userMessages": 11,
+     "assistantMessages": 11,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-342.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-430",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1781154910979.273,
+     "lastEvent": 1781164139966.9265,
+     "activeMs": 2716506.4338378906,
+     "spanMs": 9228987.653564453,
+     "blocks": [
+      {
+       "start": 1781154910979.273,
+       "end": 1781156408348.252,
+       "durationMs": 1497368.9790039062,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      },
+      {
+       "start": 1781162920829.4717,
+       "end": 1781164139966.9265,
+       "durationMs": 1219137.4548339844,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      }
+     ],
+     "eventCount": 28,
+     "userMessages": 14,
+     "assistantMessages": 14,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-430.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-471",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1780815116504.8142,
+     "lastEvent": 1780826625201.747,
+     "activeMs": 4747575.652832031,
+     "spanMs": 11508696.932861328,
+     "blocks": [
+      {
+       "start": 1780815116504.8142,
+       "end": 1780816517514.475,
+       "durationMs": 1401009.6608886719,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1780823278635.7551,
+       "end": 1780826625201.747,
+       "durationMs": 3346565.9919433594,
+       "eventCount": 28,
+       "userMessages": 14,
+       "assistantMessages": 14
+      }
+     ],
+     "eventCount": 44,
+     "userMessages": 22,
+     "assistantMessages": 22,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-471.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-501",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1780555287161.5906,
+     "lastEvent": 1780555786340.5647,
+     "activeMs": 499178.97412109375,
+     "spanMs": 499178.97412109375,
+     "blocks": [
+      {
+       "start": 1780555287161.5906,
+       "end": 1780555786340.5647,
+       "durationMs": 499178.97412109375,
+       "eventCount": 6,
+       "userMessages": 3,
+       "assistantMessages": 3
+      }
+     ],
+     "eventCount": 6,
+     "userMessages": 3,
+     "assistantMessages": 3,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-501.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-540",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1780199014144.2317,
+     "lastEvent": 1780221874640.1157,
+     "activeMs": 7775242.932128906,
+     "spanMs": 22860495.884033203,
+     "blocks": [
+      {
+       "start": 1780199014144.2317,
+       "end": 1780202107220.072,
+       "durationMs": 3093075.8403320312,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      },
+      {
+       "start": 1780212750138.067,
+       "end": 1780214298348.1953,
+       "durationMs": 1548210.1284179688,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1780218740683.1523,
+       "end": 1780221874640.1157,
+       "durationMs": 3133956.9633789062,
+       "eventCount": 38,
+       "userMessages": 19,
+       "assistantMessages": 19
+      }
+     ],
+     "eventCount": 88,
+     "userMessages": 44,
+     "assistantMessages": 44,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-540.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-551",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1780119680362.5127,
+     "lastEvent": 1780136604596.6624,
+     "activeMs": 8365209.971435547,
+     "spanMs": 16924234.149658203,
+     "blocks": [
+      {
+       "start": 1780119680362.5127,
+       "end": 1780121255879.58,
+       "durationMs": 1575517.0673828125,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      },
+      {
+       "start": 1780125593165.7495,
+       "end": 1780129376069.7053,
+       "durationMs": 3782903.955810547,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      },
+      {
+       "start": 1780133597807.714,
+       "end": 1780136604596.6624,
+       "durationMs": 3006788.9482421875,
+       "eventCount": 34,
+       "userMessages": 17,
+       "assistantMessages": 17
+      }
+     ],
+     "eventCount": 90,
+     "userMessages": 45,
+     "assistantMessages": 45,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-551.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-660",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1779153564814.951,
+     "lastEvent": 1779165194485.6482,
+     "activeMs": 5280897.818603516,
+     "spanMs": 11629670.697265625,
+     "blocks": [
+      {
+       "start": 1779153564814.951,
+       "end": 1779157442985.5544,
+       "durationMs": 3878170.603515625,
+       "eventCount": 40,
+       "userMessages": 20,
+       "assistantMessages": 20
+      },
+      {
+       "start": 1779163791758.433,
+       "end": 1779165194485.6482,
+       "durationMs": 1402727.2150878906,
+       "eventCount": 14,
+       "userMessages": 7,
+       "assistantMessages": 7
+      }
+     ],
+     "eventCount": 54,
+     "userMessages": 27,
+     "assistantMessages": 27,
+     "gitBranch": "main",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-660.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-690",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1778901237376.4534,
+     "lastEvent": 1778909643449.0142,
+     "activeMs": 3376188.6682128906,
+     "spanMs": 8406072.560791016,
+     "blocks": [
+      {
+       "start": 1778901237376.4534,
+       "end": 1778903324431.4268,
+       "durationMs": 2087054.9733886719,
+       "eventCount": 24,
+       "userMessages": 12,
+       "assistantMessages": 12
+      },
+      {
+       "start": 1778908354315.3193,
+       "end": 1778909643449.0142,
+       "durationMs": 1289133.6948242188,
+       "eventCount": 16,
+       "userMessages": 8,
+       "assistantMessages": 8
+      }
+     ],
+     "eventCount": 40,
+     "userMessages": 20,
+     "assistantMessages": 20,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-690.jsonl"
+    },
+    {
+     "sessionId": "demo-infra-750",
+     "projectPath": "/home/demo/projects/infra",
+     "projectName": "infra",
+     "firstEvent": 1778399973945.4766,
+     "lastEvent": 1778412363113.5967,
+     "activeMs": 6117914.3349609375,
+     "spanMs": 12389168.120117188,
+     "blocks": [
+      {
+       "start": 1778399973945.4766,
+       "end": 1778402884181.5027,
+       "durationMs": 2910236.026123047,
+       "eventCount": 30,
+       "userMessages": 15,
+       "assistantMessages": 15
+      },
+      {
+       "start": 1778404883982.9907,
+       "end": 1778407262026.8113,
+       "durationMs": 2378043.8205566406,
+       "eventCount": 26,
+       "userMessages": 13,
+       "assistantMessages": 13
+      },
+      {
+       "start": 1778411533479.1084,
+       "end": 1778412363113.5967,
+       "durationMs": 829634.48828125,
+       "eventCount": 8,
+       "userMessages": 4,
+       "assistantMessages": 4
+      }
+     ],
+     "eventCount": 64,
+     "userMessages": 32,
+     "assistantMessages": 32,
+     "gitBranch": "feature/demo",
+     "version": "2.1.0",
+     "file": "/demo/demo-infra-750.jsonl"
+    }
+   ]
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-05-10",
+   "activeMs": 11142433.558105469,
+   "byProject": {
+    "infra": 6117914.3349609375,
+    "data-pipeline": 5024519.223144531
+   }
+  },
+  {
+   "date": "2026-05-11",
+   "activeMs": 791775.0278320312,
+   "byProject": {
+    "marketing-site": 791775.0278320312
+   }
+  },
+  {
+   "date": "2026-05-12",
+   "activeMs": 554792.4313964844,
+   "byProject": {
+    "marketing-site": 554792.4313964844
+   }
+  },
+  {
+   "date": "2026-05-13",
+   "activeMs": 8045738.337890625,
+   "byProject": {
+    "mobile-app": 3414820.9494628906,
+    "marketing-site": 2021411.2563476562,
+    "api-gateway": 2609506.132080078
+   }
+  },
+  {
+   "date": "2026-05-16",
+   "activeMs": 3376188.6682128906,
+   "byProject": {
+    "infra": 3376188.6682128906
+   }
+  },
+  {
+   "date": "2026-05-17",
+   "activeMs": 13341665.737548828,
+   "byProject": {
+    "mobile-app": 13341665.737548828
+   }
+  },
+  {
+   "date": "2026-05-18",
+   "activeMs": 3409060.4899902344,
+   "byProject": {
+    "data-pipeline": 3409060.4899902344
+   }
+  },
+  {
+   "date": "2026-05-19",
+   "activeMs": 12108123.550048828,
+   "byProject": {
+    "infra": 5280897.818603516,
+    "api-gateway": 6827225.7314453125
+   }
+  },
+  {
+   "date": "2026-05-20",
+   "activeMs": 10676515.5859375,
+   "byProject": {
+    "mobile-app": 10676515.5859375
+   }
+  },
+  {
+   "date": "2026-05-21",
+   "activeMs": 10144785.550292969,
+   "byProject": {
+    "marketing-site": 5822297.650878906,
+    "storefront": 4322487.8994140625
+   }
+  },
+  {
+   "date": "2026-05-24",
+   "activeMs": 9884240.858886719,
+   "byProject": {
+    "api-gateway": 5976999.726806641,
+    "marketing-site": 3907241.132080078
+   }
+  },
+  {
+   "date": "2026-05-25",
+   "activeMs": 10775605.744140625,
+   "byProject": {
+    "storefront": 4127761.8911132812,
+    "marketing-site": 6647843.853027344
+   }
+  },
+  {
+   "date": "2026-05-29",
+   "activeMs": 11033470.987304688,
+   "byProject": {
+    "storefront": 11033470.987304688
+   }
+  },
+  {
+   "date": "2026-05-30",
+   "activeMs": 11783005.866699219,
+   "byProject": {
+    "marketing-site": 3417795.895263672,
+    "infra": 8365209.971435547
+   }
+  },
+  {
+   "date": "2026-05-31",
+   "activeMs": 7775242.932128906,
+   "byProject": {
+    "infra": 7775242.932128906
+   }
+  },
+  {
+   "date": "2026-06-03",
+   "activeMs": 6770075.753662109,
+   "byProject": {
+    "mobile-app": 6770075.753662109
+   }
+  },
+  {
+   "date": "2026-06-04",
+   "activeMs": 9596497.739257812,
+   "byProject": {
+    "mobile-app": 9097318.765136719,
+    "infra": 499178.97412109375
+   }
+  },
+  {
+   "date": "2026-06-05",
+   "activeMs": 2580382.653564453,
+   "byProject": {
+    "storefront": 254806.501953125,
+    "marketing-site": 2325576.151611328
+   }
+  },
+  {
+   "date": "2026-06-07",
+   "activeMs": 8011236.926513672,
+   "byProject": {
+    "api-gateway": 3263661.2736816406,
+    "infra": 4747575.652832031
+   }
+  },
+  {
+   "date": "2026-06-08",
+   "activeMs": 20007146.54248047,
+   "byProject": {
+    "mobile-app": 5171090.652099609,
+    "api-gateway": 14836055.89038086
+   }
+  },
+  {
+   "date": "2026-06-10",
+   "activeMs": 8215990.984375,
+   "byProject": {
+    "data-pipeline": 8215990.984375
+   }
+  },
+  {
+   "date": "2026-06-11",
+   "activeMs": 2716506.4338378906,
+   "byProject": {
+    "infra": 2716506.4338378906
+   }
+  },
+  {
+   "date": "2026-06-12",
+   "activeMs": 6244912.987792969,
+   "byProject": {
+    "api-gateway": 6244912.987792969
+   }
+  },
+  {
+   "date": "2026-06-14",
+   "activeMs": 11825182.060302734,
+   "byProject": {
+    "marketing-site": 4036324.2189941406,
+    "mobile-app": 7788857.841308594
+   }
+  },
+  {
+   "date": "2026-06-16",
+   "activeMs": 4677852.558349609,
+   "byProject": {
+    "api-gateway": 4677852.558349609
+   }
+  },
+  {
+   "date": "2026-06-17",
+   "activeMs": 741414.1384277344,
+   "byProject": {
+    "api-gateway": 741414.1384277344
+   }
+  },
+  {
+   "date": "2026-06-20",
+   "activeMs": 12304882.565429688,
+   "byProject": {
+    "data-pipeline": 5878956.824707031,
+    "api-gateway": 4101780.4650878906,
+    "infra": 2324145.2756347656
+   }
+  },
+  {
+   "date": "2026-06-21",
+   "activeMs": 17292685.182128906,
+   "byProject": {
+    "storefront": 1723585.1145019531,
+    "infra": 6254370.426513672,
+    "marketing-site": 9314729.641113281
+   }
+  },
+  {
+   "date": "2026-06-22",
+   "activeMs": 10661105.736816406,
+   "byProject": {
+    "storefront": 3004968.2595214844,
+    "marketing-site": 3545131.77734375,
+    "infra": 4111005.699951172
+   }
+  },
+  {
+   "date": "2026-06-24",
+   "activeMs": 11465900.51196289,
+   "byProject": {
+    "marketing-site": 7754567.525634766,
+    "storefront": 3711332.986328125
+   }
+  },
+  {
+   "date": "2026-06-25",
+   "activeMs": 3534534.37890625,
+   "byProject": {
+    "mobile-app": 3534534.37890625
+   }
+  },
+  {
+   "date": "2026-06-26",
+   "activeMs": 7946332.141113281,
+   "byProject": {
+    "data-pipeline": 7946332.141113281
+   }
+  },
+  {
+   "date": "2026-06-27",
+   "activeMs": 9146028.807128906,
+   "byProject": {
+    "mobile-app": 1767271.0769042969,
+    "data-pipeline": 7378757.730224609
+   }
+  },
+  {
+   "date": "2026-06-28",
+   "activeMs": 8202682.756347656,
+   "byProject": {
+    "infra": 380762.5129394531,
+    "data-pipeline": 7821920.243408203
+   }
+  },
+  {
+   "date": "2026-06-30",
+   "activeMs": 7231303.371826172,
+   "byProject": {
+    "api-gateway": 2601066.9416503906,
+    "mobile-app": 4630236.430175781
+   }
+  },
+  {
+   "date": "2026-07-02",
+   "activeMs": 7798433.297363281,
+   "byProject": {
+    "data-pipeline": 7798433.297363281
+   }
+  },
+  {
+   "date": "2026-07-03",
+   "activeMs": 8399170.8515625,
+   "byProject": {
+    "api-gateway": 6718897.8916015625,
+    "infra": 1680272.9599609375
+   }
+  },
+  {
+   "date": "2026-07-05",
+   "activeMs": 8178412.877685547,
+   "byProject": {
+    "storefront": 8178412.877685547
+   }
+  },
+  {
+   "date": "2026-07-07",
+   "activeMs": 14214432.069580078,
+   "byProject": {
+    "mobile-app": 8396083.290039062,
+    "storefront": 5818348.779541016
+   }
+  },
+  {
+   "date": "2026-07-08",
+   "activeMs": 11166658.706298828,
+   "byProject": {
+    "storefront": 5507203.314208984,
+    "marketing-site": 4852373.458251953,
+    "api-gateway": 807081.9338378906
+   }
+  },
+  {
+   "date": "2026-07-09",
+   "activeMs": 5370517.759765625,
+   "byProject": {
+    "api-gateway": 2260388.124267578,
+    "data-pipeline": 3110129.635498047
+   }
+  },
+  {
+   "date": "2026-07-11",
+   "activeMs": 5689170.721923828,
+   "byProject": {
+    "marketing-site": 1878210.1428222656,
+    "api-gateway": 2356079.26171875,
+    "data-pipeline": 1454881.3173828125
+   }
+  },
+  {
+   "date": "2026-07-13",
+   "activeMs": 15447434.0859375,
+   "byProject": {
+    "infra": 5920336.87109375,
+    "api-gateway": 6961379.052001953,
+    "storefront": 2565718.162841797
+   }
+  },
+  {
+   "date": "2026-07-15",
+   "activeMs": 1474772.376953125,
+   "byProject": {
+    "mobile-app": 1474772.376953125
+   }
+  },
+  {
+   "date": "2026-07-16",
+   "activeMs": 8319960.305419922,
+   "byProject": {
+    "storefront": 8319960.305419922
+   }
+  },
+  {
+   "date": "2026-07-17",
+   "activeMs": 4361571.0283203125,
+   "byProject": {
+    "mobile-app": 664821.6467285156,
+    "data-pipeline": 3696749.381591797
+   }
+  },
+  {
+   "date": "2026-07-20",
+   "activeMs": 2244396.04296875,
+   "byProject": {
+    "api-gateway": 2244396.04296875
+   }
+  },
+  {
+   "date": "2026-07-22",
+   "activeMs": 1537350.1496582031,
+   "byProject": {
+    "marketing-site": 1537350.1496582031
+   }
+  },
+  {
+   "date": "2026-07-23",
+   "activeMs": 7146389.579589844,
+   "byProject": {
+    "marketing-site": 6961605.58984375,
+    "data-pipeline": 184783.98974609375
+   }
+  },
+  {
+   "date": "2026-07-24",
+   "activeMs": 6550237.017333984,
+   "byProject": {
+    "mobile-app": 2635819.7067871094,
+    "storefront": 3914417.310546875
+   }
+  }
+ ]
+}

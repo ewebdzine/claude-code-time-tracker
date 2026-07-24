@@ -1,0 +1,750 @@
+"use client";
+
+/**
+ * The claude-code-time dashboard.
+ *
+ * Design follows the dataviz method: form before color, categorical hues in
+ * fixed slot order (color follows the project, never its filtered rank),
+ * thin marks with 2px surface gaps, hairline solid grid, one filter row
+ * scoping everything, hover tooltips that enhance but never gate (every
+ * chart has a table twin), and a dark mode selected from the same ramps.
+ */
+
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import type { SessionSummary, TrackerReport } from "@/lib/types";
+import {
+  assignColors,
+  computeView,
+  continuousDays,
+  fmtDayLabel,
+  fmtDayLong,
+  fmtDuration,
+  fmtHoursTick,
+  fmtTime,
+  niceMax,
+  seriesProjects,
+  OTHER_LABEL,
+  OTHER_VAR,
+  RANGE_PRESETS,
+} from "@/lib/view";
+import type { DashboardView } from "@/lib/view";
+
+/* ------------------------------------------------------------------ */
+/* Hooks                                                               */
+/* ------------------------------------------------------------------ */
+
+function useContainerWidth<T extends HTMLElement>(): [
+  React.RefObject<T | null>,
+  number
+] {
+  const ref = useRef<T | null>(null);
+  const [width, setWidth] = useState(960);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect.width;
+      if (w) setWidth(w);
+    });
+    ro.observe(el);
+    setWidth(el.clientWidth || 960);
+    return () => ro.disconnect();
+  }, []);
+  return [ref, width];
+}
+
+/* ------------------------------------------------------------------ */
+/* Stat tiles                                                          */
+/* ------------------------------------------------------------------ */
+
+function StatTile({
+  label,
+  value,
+  hint,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+}) {
+  return (
+    <div className="tile">
+      <div className="label">{label}</div>
+      <div className="value">{value}</div>
+      {hint ? <div className="hint">{hint}</div> : null}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Daily stacked columns                                               */
+/* ------------------------------------------------------------------ */
+
+interface TipState {
+  x: number;
+  y: number;
+  title: string;
+  rows: { name: string; color: string; value: string }[];
+  total?: string;
+}
+
+function Tooltip({ tip }: { tip: TipState }) {
+  return (
+    <div className="tip" style={{ left: tip.x, top: tip.y }}>
+      <div className="tip-title">{tip.title}</div>
+      {tip.rows.map((r) => (
+        <div className="row" key={r.name}>
+          <span className="key" style={{ borderTopColor: r.color }} />
+          <span className="name">{r.name}</span>
+          <span className="val">{r.value}</span>
+        </div>
+      ))}
+      {tip.total ? (
+        <div className="row total">
+          <span className="name">Total</span>
+          <span className="val">{tip.total}</span>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+/** Rect with only its top corners rounded (the data-end of a column). */
+function roundedTopPath(
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number
+): string {
+  const rr = Math.min(r, w / 2, h);
+  return [
+    `M ${x} ${y + h}`,
+    `L ${x} ${y + rr}`,
+    `Q ${x} ${y} ${x + rr} ${y}`,
+    `L ${x + w - rr} ${y}`,
+    `Q ${x + w} ${y} ${x + w} ${y + rr}`,
+    `L ${x + w} ${y + h}`,
+    "Z",
+  ].join(" ");
+}
+
+function DailyChart({
+  view,
+  series,
+  colors,
+}: {
+  view: DashboardView;
+  series: string[];
+  colors: Map<string, string>;
+}) {
+  const [wrapRef, width] = useContainerWidth<HTMLDivElement>();
+  const [tip, setTip] = useState<TipState | null>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [tableView, setTableView] = useState(false);
+
+  const days = useMemo(() => continuousDays(view.days), [view.days]);
+
+  // Series stack order: slot order bottom-up, then Other on top.
+  const stackNames = useMemo(() => {
+    const present = new Set<string>();
+    for (const d of days)
+      for (const k of Object.keys(d.byProject)) present.add(k);
+    const named = series.filter((s) => present.has(s));
+    const hasOther = [...present].some((p) => !series.includes(p));
+    return hasOther ? [...named, OTHER_LABEL] : named;
+  }, [days, series]);
+
+  const dayStacks = useMemo(
+    () =>
+      days.map((d) => {
+        const vals = new Map<string, number>();
+        let other = 0;
+        for (const [name, ms] of Object.entries(d.byProject)) {
+          if (series.includes(name)) vals.set(name, ms);
+          else other += ms;
+        }
+        if (other > 0) vals.set(OTHER_LABEL, other);
+        return vals;
+      }),
+    [days, series]
+  );
+
+  const PAD_L = 44;
+  const PAD_R = 8;
+  const PAD_T = 8;
+  const PLOT_H = 240;
+  const AXIS_H = 24; // x-axis band included in the container height
+  const H = PAD_T + PLOT_H + AXIS_H;
+
+  const plotW = Math.max(120, width - PAD_L - PAD_R);
+  const n = days.length || 1;
+  const band = plotW / n;
+  const barW = Math.min(24, Math.max(3, band * 0.66));
+  const GAP = 2; // surface gap between stacked segments
+
+  const maxMs = niceMax(Math.max(...days.map((d) => d.activeMs), 0));
+  const yFor = (ms: number) => PAD_T + PLOT_H - (ms / maxMs) * PLOT_H;
+
+  // Pick a divisor whose step lands on clean values (whole hours or
+  // 15/30-minute marks) so ticks read "1h", "30m" — never "2.3h".
+  const CLEAN = [
+    5 * 60000, 10 * 60000, 15 * 60000, 30 * 60000, 3600000, 2 * 3600000,
+    3 * 3600000, 4 * 3600000, 6 * 3600000, 8 * 3600000,
+  ];
+  const divisor =
+    [4, 3, 2].find((d) => CLEAN.includes(maxMs / d)) ?? 4;
+  const ticks = Array.from({ length: divisor + 1 }, (_, k) =>
+    (k / divisor) * maxMs
+  );
+
+  const labelEvery = Math.max(1, Math.ceil(n / Math.floor(plotW / 64)));
+
+  const colorFor = (name: string) =>
+    name === OTHER_LABEL ? OTHER_VAR : colors.get(name) ?? OTHER_VAR;
+
+  const showTip = useCallback(
+    (i: number, clientX: number, clientY: number, el: HTMLElement) => {
+      const rect = el.getBoundingClientRect();
+      const d = days[i];
+      const stack = dayStacks[i];
+      const rows = stackNames
+        .filter((s) => (stack.get(s) ?? 0) > 0)
+        .map((s) => ({
+          name: s,
+          color: colorFor(s),
+          value: fmtDuration(stack.get(s) ?? 0),
+        }));
+      setHovered(i);
+      setTip({
+        x: Math.min(clientX - rect.left + 14, rect.width - 190),
+        y: Math.max(8, clientY - rect.top - 10),
+        title: fmtDayLong(d.date),
+        rows: rows.length ? rows : [],
+        total: fmtDuration(d.activeMs),
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [days, dayStacks, stackNames, colors]
+  );
+
+  const hideTip = useCallback(() => {
+    setTip(null);
+    setHovered(null);
+  }, []);
+
+  if (days.length === 0) {
+    return <div className="empty">No activity in this range.</div>;
+  }
+
+  return (
+    <div ref={wrapRef} style={{ position: "relative" }} onPointerLeave={hideTip}>
+      {tableView ? (
+        <div className="scroll-x">
+          <table className="data">
+            <thead>
+              <tr>
+                <th>Day</th>
+                {stackNames.map((s) => (
+                  <th className="num" key={s}>
+                    {s}
+                  </th>
+                ))}
+                <th className="num">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {days.map((d, i) =>
+                d.activeMs > 0 ? (
+                  <tr key={d.date}>
+                    <td>{fmtDayLong(d.date)}</td>
+                    {stackNames.map((s) => {
+                      const v = dayStacks[i].get(s) ?? 0;
+                      return (
+                        <td className="num" key={s}>
+                          {v > 0 ? fmtDuration(v) : "–"}
+                        </td>
+                      );
+                    })}
+                    <td className="num strong">{fmtDuration(d.activeMs)}</td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <svg
+          width={width}
+          height={H}
+          role="img"
+          aria-label="Active time per day, stacked by project"
+        >
+          {/* gridlines: hairline, solid, recessive */}
+          {ticks.map((t) => (
+            <g key={t}>
+              <line
+                x1={PAD_L}
+                x2={width - PAD_R}
+                y1={yFor(t)}
+                y2={yFor(t)}
+                stroke={t === 0 ? "var(--baseline)" : "var(--grid)"}
+                strokeWidth={1}
+              />
+              <text
+                x={PAD_L - 8}
+                y={yFor(t) + 3.5}
+                textAnchor="end"
+                fontSize={11}
+                fill="var(--text-muted)"
+                style={{ fontVariantNumeric: "tabular-nums" }}
+              >
+                {fmtHoursTick(t)}
+              </text>
+            </g>
+          ))}
+
+          {/* columns */}
+          {days.map((d, i) => {
+            const x = PAD_L + i * band + (band - barW) / 2;
+            const stack = dayStacks[i];
+            let cumMs = 0;
+            const segs: React.ReactNode[] = [];
+            const parts = stackNames.filter((s) => (stack.get(s) ?? 0) > 0);
+            parts.forEach((s, si) => {
+              const ms = stack.get(s) ?? 0;
+              const yTop = yFor(cumMs + ms);
+              const yBot = yFor(cumMs);
+              const isTop = si === parts.length - 1;
+              // 2px surface gap between segments (not after the top one)
+              const gapAbove = isTop ? 0 : GAP;
+              const h = Math.max(0.5, yBot - yTop - gapAbove);
+              const fill = colorFor(s);
+              segs.push(
+                isTop ? (
+                  <path
+                    key={s}
+                    d={roundedTopPath(x, yTop, barW, h, 4)}
+                    fill={fill}
+                    opacity={hovered === null || hovered === i ? 1 : 0.45}
+                  />
+                ) : (
+                  <rect
+                    key={s}
+                    x={x}
+                    y={yTop + gapAbove}
+                    width={barW}
+                    height={h}
+                    fill={fill}
+                    opacity={hovered === null || hovered === i ? 1 : 0.45}
+                  />
+                )
+              );
+              cumMs += ms;
+            });
+
+            return (
+              <g key={d.date}>
+                {segs}
+                {/* hit target: the whole column band, bigger than the mark */}
+                <rect
+                  x={PAD_L + i * band}
+                  y={PAD_T}
+                  width={band}
+                  height={PLOT_H}
+                  fill="transparent"
+                  tabIndex={d.activeMs > 0 ? 0 : -1}
+                  aria-label={`${fmtDayLong(d.date)}: ${fmtDuration(
+                    d.activeMs
+                  )}`}
+                  onPointerMove={(e) =>
+                    showTip(
+                      i,
+                      e.clientX,
+                      e.clientY,
+                      (e.currentTarget as SVGRectElement).ownerSVGElement!
+                        .parentElement as HTMLElement
+                    )
+                  }
+                  onFocus={(e) => {
+                    const svg = (e.currentTarget as SVGRectElement)
+                      .ownerSVGElement!;
+                    const wrap = svg.parentElement as HTMLElement;
+                    const r = wrap.getBoundingClientRect();
+                    showTip(
+                      i,
+                      r.left + PAD_L + i * band + band / 2,
+                      r.top + PAD_T + 40,
+                      wrap
+                    );
+                  }}
+                  onBlur={hideTip}
+                  style={{ outline: "none" }}
+                />
+              </g>
+            );
+          })}
+
+          {/* x-axis labels */}
+          {days.map((d, i) =>
+            i % labelEvery === 0 ? (
+              <text
+                key={d.date}
+                x={PAD_L + i * band + band / 2}
+                y={PAD_T + PLOT_H + 16}
+                textAnchor="middle"
+                fontSize={11}
+                fill="var(--text-muted)"
+              >
+                {fmtDayLabel(d.date)}
+              </text>
+            ) : null
+          )}
+        </svg>
+      )}
+
+      {!tableView && stackNames.length >= 2 ? (
+        <div className="legend">
+          {stackNames.map((s) => (
+            <span className="item" key={s}>
+              <span
+                className="swatch"
+                style={{ background: colorFor(s) }}
+              />
+              {s}
+            </span>
+          ))}
+        </div>
+      ) : null}
+
+      {tip && !tableView ? <Tooltip tip={tip} /> : null}
+
+      <button
+        className="view-toggle"
+        style={{ position: "absolute", top: -34, right: 0 }}
+        onClick={() => setTableView((v) => !v)}
+      >
+        {tableView ? "Chart" : "Table"}
+      </button>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Project bars (horizontal)                                           */
+/* ------------------------------------------------------------------ */
+
+function ProjectBars({
+  view,
+  colors,
+}: {
+  view: DashboardView;
+  colors: Map<string, string>;
+}) {
+  const max = view.projectTotals[0]?.activeMs ?? 1;
+  if (view.projectTotals.length === 0)
+    return <div className="empty">No activity in this range.</div>;
+
+  return (
+    <div>
+      {view.projectTotals.map((p) => (
+        <div
+          key={p.name}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "180px 1fr 70px",
+            alignItems: "center",
+            gap: 10,
+            padding: "5px 0",
+          }}
+        >
+          <span
+            style={{
+              color: "var(--text-secondary)",
+              fontSize: 12.5,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            title={p.name}
+          >
+            <span
+              className="proj-key"
+              style={{ background: colors.get(p.name) ?? OTHER_VAR }}
+            />
+            {p.name}
+          </span>
+          <div style={{ position: "relative", height: 16 }}>
+            <div
+              style={{
+                position: "absolute",
+                insetBlock: 1,
+                left: 0,
+                width: `${Math.max(0.8, (p.activeMs / max) * 100)}%`,
+                background: colors.get(p.name) ?? OTHER_VAR,
+                borderRadius: "0 4px 4px 0", // rounded data-end, square baseline
+              }}
+            />
+          </div>
+          {/* value at the tip — text tokens, never the series color */}
+          <span
+            style={{
+              fontSize: 12.5,
+              fontWeight: 650,
+              color: "var(--text-primary)",
+              fontVariantNumeric: "tabular-nums",
+              textAlign: "right",
+            }}
+          >
+            {fmtDuration(p.activeMs)}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Sessions table                                                      */
+/* ------------------------------------------------------------------ */
+
+function SessionsTable({
+  sessions,
+  colors,
+  limit = 25,
+}: {
+  sessions: SessionSummary[];
+  colors: Map<string, string>;
+  limit?: number;
+}) {
+  const [showAll, setShowAll] = useState(false);
+  const rows = showAll ? sessions : sessions.slice(0, limit);
+
+  if (sessions.length === 0)
+    return <div className="empty">No sessions in this range.</div>;
+
+  return (
+    <div className="scroll-x">
+      <table className="data">
+        <thead>
+          <tr>
+            <th>Started</th>
+            <th>Project</th>
+            <th>First → last activity</th>
+            <th className="num">Active time</th>
+            <th className="num">Wall clock</th>
+            <th className="num">Blocks</th>
+            <th className="num">You / Claude</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((s) => (
+            <tr key={s.file}>
+              <td>
+                {new Date(s.firstEvent).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })}
+              </td>
+              <td>
+                <span
+                  className="proj-key"
+                  style={{
+                    background: colors.get(s.projectName) ?? OTHER_VAR,
+                  }}
+                />
+                {s.projectName}
+              </td>
+              <td className="num">
+                {fmtTime(s.firstEvent)} → {fmtTime(s.lastEvent)}
+              </td>
+              <td className="num strong">{fmtDuration(s.activeMs)}</td>
+              <td className="num">{fmtDuration(s.spanMs)}</td>
+              <td className="num">{s.blocks.length}</td>
+              <td className="num">
+                {s.userMessages} / {s.assistantMessages}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {sessions.length > limit ? (
+        <button
+          className="view-toggle"
+          style={{ marginTop: 10 }}
+          onClick={() => setShowAll((v) => !v)}
+        >
+          {showAll ? "Show fewer" : `Show all ${sessions.length} sessions`}
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Dashboard                                                           */
+/* ------------------------------------------------------------------ */
+
+export interface DashboardProps {
+  report: TrackerReport;
+  /** "live" shows the idle-threshold control (re-fetches); "static" hides it. */
+  mode: "live" | "static";
+  idleMinutes: number;
+  onIdleChange?: (minutes: number) => void;
+  /** Reduce opacity while a refetch is in flight (no skeleton flash). */
+  refreshing?: boolean;
+}
+
+export default function Dashboard({
+  report,
+  mode,
+  idleMinutes,
+  onIdleChange,
+  refreshing,
+}: DashboardProps) {
+  const [preset, setPreset] = useState("30d");
+  const [theme, setTheme] = useState<"auto" | "light" | "dark">("auto");
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "auto") delete root.dataset.theme;
+    else root.dataset.theme = theme;
+  }, [theme]);
+
+  const colors = useMemo(() => assignColors(report), [report]);
+  const series = useMemo(() => seriesProjects(report), [report]);
+
+  const presetDays =
+    RANGE_PRESETS.find((p) => p.key === preset)?.days ?? null;
+  const view = useMemo(
+    () => computeView(report, presetDays, report.generatedAt),
+    [report, presetDays]
+  );
+
+  return (
+    <div
+      className="wrap viz-root"
+      style={refreshing ? { opacity: 0.55, transition: "opacity .2s" } : undefined}
+    >
+      <div className="masthead">
+        <h1>Claude Code time</h1>
+        <span className="sub">
+          {report.sessionCount} sessions · {report.projectCount} projects ·
+          idle cutoff {Math.round(report.idleThresholdMs / 60000)}m
+        </span>
+      </div>
+
+      {/* one filter row, above everything it scopes */}
+      <div className="filters">
+        <div className="seg" role="group" aria-label="Date range">
+          {RANGE_PRESETS.map((p) => (
+            <button
+              key={p.key}
+              aria-pressed={preset === p.key}
+              onClick={() => setPreset(p.key)}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+        {mode === "live" ? (
+          <>
+            <label htmlFor="idle">Idle cutoff</label>
+            <select
+              id="idle"
+              value={idleMinutes}
+              onChange={(e) => onIdleChange?.(Number(e.target.value))}
+            >
+              <option value={5}>5 min</option>
+              <option value={15}>15 min</option>
+              <option value={30}>30 min</option>
+              <option value={60}>60 min</option>
+            </select>
+          </>
+        ) : null}
+        <span className="spacer" />
+        <button
+          className="theme-toggle"
+          onClick={() =>
+            setTheme((t) =>
+              t === "auto" ? "dark" : t === "dark" ? "light" : "auto"
+            )
+          }
+        >
+          Theme: {theme}
+        </button>
+      </div>
+
+      <div className="kpis">
+        <StatTile
+          label="Active time"
+          value={fmtDuration(view.totalActiveMs)}
+          hint={
+            RANGE_PRESETS.find((p) => p.key === preset)?.label ?? "All time"
+          }
+        />
+        <StatTile
+          label="Sessions"
+          value={String(view.sessionCount)}
+          hint={`across ${view.projectTotals.length} project${
+            view.projectTotals.length === 1 ? "" : "s"
+          }`}
+        />
+        <StatTile
+          label="Active days"
+          value={String(view.activeDayCount)}
+          hint="days with tracked work"
+        />
+        <StatTile
+          label="Avg per active day"
+          value={fmtDuration(view.avgPerActiveDayMs)}
+        />
+      </div>
+
+      <div className="card">
+        <div className="card-head">
+          <h2>Active time per day</h2>
+          <span className="meta" style={{ marginRight: 64 }}>
+            {`gaps over ${Math.round(
+              report.idleThresholdMs / 60000
+            )} minutes don't count`}
+          </span>
+        </div>
+        <DailyChart view={view} series={series} colors={colors} />
+      </div>
+
+      <div className="card">
+        <div className="card-head">
+          <h2>Time by project</h2>
+        </div>
+        <ProjectBars view={view} colors={colors} />
+      </div>
+
+      <div className="card">
+        <div className="card-head">
+          <h2>Sessions</h2>
+          <span className="meta">most recent first</span>
+        </div>
+        <SessionsTable sessions={view.sessions} colors={colors} />
+      </div>
+
+      <footer className="credits">
+        Generated {new Date(report.generatedAt).toLocaleString()} from{" "}
+        {mode === "live" ? report.claudeDir : "a snapshot of session logs"} ·{" "}
+        <a
+          href="https://github.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          claude-code-time
+        </a>{" "}
+        — open source, MIT.
+      </footer>
+    </div>
+  );
+}
