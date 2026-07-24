@@ -1,5 +1,5 @@
 /**
- * Core types for claude-code-time.
+ * Core types for claude-code-time-tracker.
  */
 
 /** A single timestamped event pulled from a Claude Code session transcript. */

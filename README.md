@@ -1,8 +1,8 @@
-# claude-code-time
+# claude-code-time-tracker
 
 **Idle-aware time tracking for [Claude Code](https://claude.com/claude-code) — see how long you and Claude actually worked, per project, per day, per session.**
 
-Claude Code already writes a complete transcript of every session to `~/.claude/projects/<project>/<session>.jsonl`, with a timestamp on every message. `claude-code-time` reads those logs and turns them into an honest time report:
+Claude Code already writes a complete transcript of every session to `~/.claude/projects/<project>/<session>.jsonl`, with a timestamp on every message. `claude-code-time-tracker` reads those logs and turns them into an honest time report:
 
 - **Active time, not wall clock.** The clock runs while there's back-and-forth activity. Any gap longer than the idle threshold (default **15 minutes**) splits the session into separate work blocks — so if Claude finishes at 2pm and you don't come back until 4pm, those two hours don't count. Come back and work another two hours, and that block is tracked as its own stretch.
 - **Per project · per day · per session.** Totals by project, a stacked daily chart, and a session table with active vs wall-clock time, work-block counts, and message counts.
@@ -11,8 +11,8 @@ Claude Code already writes a complete transcript of every session to `~/.claude/
 ## Quick start
 
 ```bash
-git clone https://github.com/YOURNAME/claude-code-time
-cd claude-code-time
+git clone https://github.com/ewebdzine/claude-code-time-tracker
+cd claude-code-time-tracker
 npm install
 npm run dev
 ```

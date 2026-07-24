@@ -41,7 +41,7 @@ export default function Home() {
           </div>
           <p style={{ color: "var(--text-secondary)" }}>{error}</p>
           <p style={{ color: "var(--text-muted)", fontSize: 12.5 }}>
-            claude-code-time reads Claude Code transcripts from ~/.claude
+            claude-code-time-tracker reads Claude Code transcripts from ~/.claude
             (override with the CLAUDE_DIR environment variable) and works when
             run on the machine where Claude Code runs.
           </p>

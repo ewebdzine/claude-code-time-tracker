@@ -1,5 +1,5 @@
 /**
- * claude-code-time — public API.
+ * claude-code-time-tracker — public API.
  *
  * Scan a Claude Code data directory and produce a time-tracking report
  * with idle-aware active durations per session, project, and day.

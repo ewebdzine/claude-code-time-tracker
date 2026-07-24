@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * The claude-code-time dashboard.
+ * The claude-code-time-tracker dashboard.
  *
  * Design follows the dataviz method: form before color, categorical hues in
  * fixed slot order (color follows the project, never its filtered rank),
@@ -741,7 +741,7 @@ export default function Dashboard({
           target="_blank"
           rel="noreferrer"
         >
-          claude-code-time
+          claude-code-time-tracker
         </a>{" "}
         — open source, MIT.
       </footer>
