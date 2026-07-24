@@ -1,5 +1,6 @@
 import { scan, defaultClaudeDir, DEFAULT_IDLE_THRESHOLD_MS } from "@/lib";
-import { loadReportFromBlob } from "@/lib/blob";
+import { loadReportFromBlob, BLOB_REPORT_PATHNAME } from "@/lib/blob";
+import { get } from "@vercel/blob";
 
 /**
  * GET /api/data
@@ -8,9 +9,39 @@ import { loadReportFromBlob } from "@/lib/blob";
  *   idleMinutes  — idle threshold in minutes (default 15)
  *   days         — only include the last N days
  *   tz           — IANA timezone for day bucketing (default: server local)
+ *   debug=1      — return Blob-read diagnostics instead of data (no secrets)
  */
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
+
+  // Safe diagnostic (this route is behind auth). Reports why the Blob read
+  // may be failing without ever exposing the token or your data.
+  if (searchParams.get("debug") === "1") {
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    const info: Record<string, unknown> = {
+      tokenPresent: Boolean(token),
+      pathname: BLOB_REPORT_PATHNAME,
+    };
+    if (token) {
+      try {
+        const r = await get(BLOB_REPORT_PATHNAME, {
+          access: "private",
+          token,
+          useCache: false,
+        });
+        if (!r) {
+          info.blobRead = "null (not found at pathname)";
+        } else {
+          const j = (await new Response(r.stream).json()) as { sessionCount?: number };
+          info.blobRead = "ok";
+          info.blobSessionCount = j.sessionCount ?? null;
+        }
+      } catch (e) {
+        info.blobError = e instanceof Error ? e.message : String(e);
+      }
+    }
+    return Response.json(info);
+  }
 
   const idleMinutes = Number(searchParams.get("idleMinutes"));
   const idleThresholdMs =
