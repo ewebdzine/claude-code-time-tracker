@@ -442,9 +442,11 @@ function DailyChart({
 function ProjectBars({
   view,
   colors,
+  onSelect,
 }: {
   view: DashboardView;
   colors: Map<string, string>;
+  onSelect?: (name: string) => void;
 }) {
   const max = view.projectTotals[0]?.activeMs ?? 1;
   if (view.projectTotals.length === 0)
@@ -455,12 +457,26 @@ function ProjectBars({
       {view.projectTotals.map((p) => (
         <div
           key={p.name}
+          className={onSelect ? "hoverable-row" : undefined}
+          onClick={onSelect ? () => onSelect(p.name) : undefined}
+          role={onSelect ? "button" : undefined}
+          tabIndex={onSelect ? 0 : undefined}
+          onKeyDown={
+            onSelect
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") onSelect(p.name);
+                }
+              : undefined
+          }
+          title={onSelect ? `View ${p.name} only` : undefined}
           style={{
             display: "grid",
             gridTemplateColumns: "180px 1fr 70px",
             alignItems: "center",
             gap: 10,
             padding: "5px 0",
+            cursor: onSelect ? "pointer" : undefined,
+            borderRadius: 6,
           }}
         >
           <span
@@ -513,13 +529,51 @@ function ProjectBars({
 /* Sessions table                                                      */
 /* ------------------------------------------------------------------ */
 
+const RATING_HEX = {
+  green: "#3fb950",
+  yellow: "#d29922",
+  red: "#f85149",
+} as const;
+
+/** 🟢/🟡/🔴 dot + score + type tag; the coaching note is on hover. */
+function PromptBadge({ score }: { score?: SessionSummary["promptScore"] }) {
+  if (!score)
+    return <span style={{ color: "var(--text-muted)" }}>–</span>;
+  return (
+    <span
+      title={`${score.type} · ${score.note}`}
+      style={{ whiteSpace: "nowrap", cursor: "help" }}
+    >
+      <span
+        style={{
+          display: "inline-block",
+          width: 8,
+          height: 8,
+          borderRadius: "50%",
+          background: RATING_HEX[score.rating],
+          marginRight: 6,
+          verticalAlign: "middle",
+        }}
+      />
+      <span style={{ fontVariantNumeric: "tabular-nums" }}>{score.score}/5</span>
+      <span
+        style={{ color: "var(--text-muted)", marginLeft: 6, fontSize: 11 }}
+      >
+        {score.type}
+      </span>
+    </span>
+  );
+}
+
 function SessionsTable({
   sessions,
   colors,
+  onSelect,
   limit = 25,
 }: {
   sessions: SessionSummary[];
   colors: Map<string, string>;
+  onSelect?: (name: string) => void;
   limit?: number;
 }) {
   const [showAll, setShowAll] = useState(false);
@@ -535,6 +589,7 @@ function SessionsTable({
           <tr>
             <th>Started</th>
             <th>Project</th>
+            <th>Prompt</th>
             <th>First → last activity</th>
             <th className="num">Active time</th>
             <th className="num">Wall clock</th>
@@ -558,7 +613,20 @@ function SessionsTable({
                     background: colors.get(s.projectName) ?? OTHER_VAR,
                   }}
                 />
-                {s.projectName}
+                {onSelect ? (
+                  <button
+                    className="link-btn"
+                    onClick={() => onSelect(s.projectName)}
+                    title={`View ${s.projectName} only`}
+                  >
+                    {s.projectName}
+                  </button>
+                ) : (
+                  s.projectName
+                )}
+              </td>
+              <td>
+                <PromptBadge score={s.promptScore} />
               </td>
               <td className="num">
                 {fmtTime(s.firstEvent)} → {fmtTime(s.lastEvent)}
@@ -609,6 +677,7 @@ export default function Dashboard({
 }: DashboardProps) {
   const [preset, setPreset] = useState("30d");
   const [theme, setTheme] = useState<"auto" | "light" | "dark">("auto");
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -617,14 +686,30 @@ export default function Dashboard({
   }, [theme]);
 
   const colors = useMemo(() => assignColors(report), [report]);
-  const series = useMemo(() => seriesProjects(report), [report]);
+  // When scoped to one project, it is the only series (keeps its stable color).
+  const series = useMemo(
+    () => (selectedProject ? [selectedProject] : seriesProjects(report)),
+    [report, selectedProject]
+  );
 
   const presetDays =
     RANGE_PRESETS.find((p) => p.key === preset)?.days ?? null;
   const view = useMemo(
-    () => computeView(report, presetDays, report.generatedAt),
-    [report, presetDays]
+    () => computeView(report, presetDays, report.generatedAt, selectedProject),
+    [report, presetDays, selectedProject]
   );
+
+  // Prompt-health summary for the sessions in view.
+  const promptCounts = useMemo(() => {
+    const c = { green: 0, yellow: 0, red: 0, scored: 0 };
+    for (const s of view.sessions) {
+      if (s.promptScore) {
+        c[s.promptScore.rating]++;
+        c.scored++;
+      }
+    }
+    return c;
+  }, [view.sessions]);
 
   return (
     <div
@@ -632,12 +717,31 @@ export default function Dashboard({
       style={refreshing ? { opacity: 0.55, transition: "opacity .2s" } : undefined}
     >
       <div className="masthead">
-        <h1>Claude Code time</h1>
+        <h1>Claude Code Time Tracker</h1>
         <span className="sub">
           {report.sessionCount} sessions · {report.projectCount} projects ·
           idle cutoff {Math.round(report.idleThresholdMs / 60000)}m
         </span>
       </div>
+
+      {selectedProject ? (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            gap: 12,
+            margin: "2px 0 14px",
+          }}
+        >
+          <button className="link-btn" onClick={() => setSelectedProject(null)}>
+            ← All projects
+          </button>
+          <span className="sub">
+            Viewing <strong>{selectedProject}</strong> · {view.sessionCount}{" "}
+            sessions · {fmtDuration(view.totalActiveMs)} active
+          </span>
+        </div>
+      ) : null}
 
       {/* one filter row, above everything it scopes */}
       <div className="filters">
@@ -721,16 +825,32 @@ export default function Dashboard({
       <div className="card">
         <div className="card-head">
           <h2>Time by project</h2>
+          {!selectedProject ? (
+            <span className="meta">click a project to focus</span>
+          ) : null}
         </div>
-        <ProjectBars view={view} colors={colors} />
+        <ProjectBars
+          view={view}
+          colors={colors}
+          onSelect={selectedProject ? undefined : setSelectedProject}
+        />
       </div>
 
       <div className="card">
         <div className="card-head">
           <h2>Sessions</h2>
-          <span className="meta">most recent first</span>
+          <span className="meta">
+            {promptCounts.scored > 0
+              ? `🟢 ${promptCounts.green} · 🟡 ${promptCounts.yellow} · 🔴 ${promptCounts.red} · `
+              : ""}
+            most recent first
+          </span>
         </div>
-        <SessionsTable sessions={view.sessions} colors={colors} />
+        <SessionsTable
+          sessions={view.sessions}
+          colors={colors}
+          onSelect={selectedProject ? undefined : setSelectedProject}
+        />
       </div>
 
       <footer className="credits">

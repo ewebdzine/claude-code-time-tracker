@@ -10,9 +10,11 @@
     "test": "vitest run",
     "snapshot": "tsx scripts/export-static.ts",
     "demo-data": "tsx scripts/make-demo.ts",
-    "push-blob": "tsx scripts/push-blob.ts"
+    "push-blob": "tsx scripts/push-blob.ts",
+    "score-sessions": "tsx scripts/score-sessions.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
     "@vercel/blob": "^2.6.1",
     "jose": "^6.2.4",
     "next": "16.2.11",

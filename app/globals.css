@@ -263,6 +263,28 @@ body {
   color: var(--text-primary);
 }
 
+/* Inline "link" button — project drill-down triggers. */
+.link-btn {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.link-btn:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.hoverable-row:hover {
+  background: var(--surface-2, rgba(127, 127, 127, 0.06));
+}
+
 /* ---- legend: identity channel, text in text tokens ---- */
 .legend {
   display: flex;

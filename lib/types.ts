@@ -53,6 +53,22 @@ export interface SessionSummary {
   version?: string;
   /** Transcript file this summary was computed from. */
   file: string;
+  /**
+   * Optional prompt-health rating, attached after scanning by
+   * scripts/score-sessions. Never computed from message content in the parser.
+   */
+  promptScore?: PromptScore;
+}
+
+/** How well the user prompted/steered Claude in a session (LLM-judged). */
+export interface PromptScore {
+  /** The session's nature — the rating is calibrated to this. */
+  type: "explore" | "build" | "debug" | "mixed";
+  rating: "green" | "yellow" | "red";
+  /** 1..5, relative to the type's bar. */
+  score: number;
+  /** One-line, second-person coaching tip. */
+  note: string;
 }
 
 /** Aggregated stats for one project. */

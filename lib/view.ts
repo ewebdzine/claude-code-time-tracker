@@ -78,7 +78,9 @@ export interface DashboardView {
 export function computeView(
   report: TrackerReport,
   presetDays: number | null,
-  nowMs: number
+  nowMs: number,
+  /** When set, scope the whole view to a single project. */
+  projectFilter?: string | null
 ): DashboardView {
   let cutoffKey: string | null = null;
   if (presetDays != null) {
@@ -87,15 +89,28 @@ export function computeView(
     cutoffKey = fmtDateKeyLocal(cutoff);
   }
 
-  const days = cutoffKey
+  let days = cutoffKey
     ? report.days.filter((d) => d.date >= cutoffKey!)
     : report.days;
+
+  // Scope each day to the single project (keeps the same continuous axis).
+  if (projectFilter) {
+    days = days.map((d) => {
+      const ms = d.byProject[projectFilter] ?? 0;
+      return {
+        date: d.date,
+        activeMs: ms,
+        byProject: ms > 0 ? { [projectFilter]: ms } : {},
+      };
+    });
+  }
 
   const sinceMs =
     presetDays != null ? nowMs - presetDays * 86400000 : -Infinity;
 
   const sessions: SessionSummary[] = [];
   for (const p of report.projects) {
+    if (projectFilter && p.projectName !== projectFilter) continue;
     for (const s of p.sessions) {
       if (s.lastEvent >= sinceMs) sessions.push(s);
     }

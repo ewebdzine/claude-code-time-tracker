@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "claude-code-time-tracker",
+  title: "Claude Code Time Tracker",
   description:
     "Idle-aware time tracking for Claude Code — see how long you and Claude actually worked, per project, per day, per session.",
 };

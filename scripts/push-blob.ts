@@ -12,6 +12,7 @@
 import { put } from "@vercel/blob";
 import { scan, defaultClaudeDir } from "../lib";
 import { BLOB_REPORT_PATHNAME } from "../lib/blob";
+import { attachScores } from "../lib/scores";
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -42,6 +43,9 @@ async function main() {
     console.error(`No sessions found under ${claudeDir} — nothing to push.`);
     process.exit(1);
   }
+
+  // Fold in any prompt-health ratings so the hosted dashboard shows them too.
+  attachScores(report);
 
   await put(BLOB_REPORT_PATHNAME, JSON.stringify(report), {
     access: "private",
