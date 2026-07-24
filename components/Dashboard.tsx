@@ -607,23 +607,41 @@ function SessionsTable({
                 })}
               </td>
               <td>
-                <span
-                  className="proj-key"
-                  style={{
-                    background: colors.get(s.projectName) ?? OTHER_VAR,
-                  }}
-                />
-                {onSelect ? (
-                  <button
-                    className="link-btn"
-                    onClick={() => onSelect(s.projectName)}
-                    title={`View ${s.projectName} only`}
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span
+                    className="proj-key"
+                    style={{
+                      background: colors.get(s.projectName) ?? OTHER_VAR,
+                    }}
+                  />
+                  {onSelect ? (
+                    <button
+                      className="link-btn"
+                      onClick={() => onSelect(s.projectName)}
+                      title={`View ${s.projectName} only`}
+                    >
+                      {s.projectName}
+                    </button>
+                  ) : (
+                    s.projectName
+                  )}
+                </div>
+                {s.title ? (
+                  <div
+                    title={s.title}
+                    style={{
+                      color: "var(--text-muted)",
+                      fontSize: 11.5,
+                      marginTop: 2,
+                      maxWidth: 240,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
                   >
-                    {s.projectName}
-                  </button>
-                ) : (
-                  s.projectName
-                )}
+                    {s.title}
+                  </div>
+                ) : null}
               </td>
               <td>
                 <PromptBadge score={s.promptScore} />
@@ -661,10 +679,16 @@ function SessionsTable({
 const CAL_ROW_H = 40; // px per hour
 const DAY_MS = 86400000;
 
-/** Local-midnight epoch for the Sunday of the week containing `ms`. */
-function startOfWeek(ms: number): number {
+/** Local-midnight epoch for the day containing `ms`. */
+function startOfDay(ms: number): number {
   const d = new Date(ms);
   d.setHours(0, 0, 0, 0);
+  return d.getTime();
+}
+
+/** Local-midnight epoch for the Sunday of the week containing `ms`. */
+function startOfWeek(ms: number): number {
+  const d = new Date(startOfDay(ms));
   d.setDate(d.getDate() - d.getDay());
   return d.getTime();
 }
@@ -677,6 +701,7 @@ function fmtHourLabel(h: number): string {
 }
 
 interface CalBlock {
+  session: SessionSummary;
   projectName: string;
   activeMs: number;
   note?: string;
@@ -691,21 +716,29 @@ interface CalBlock {
  * A week grid of the idle-split WORK BLOCKS (the actual active periods), placed
  * by the time they ran and colored by project — not the full session spans.
  */
+const CAL_COLLAPSED_H = 400;
+
 function WeekCalendar({
   sessions,
   colors,
   nowMs,
-  onSelect,
+  onOpenSession,
 }: {
   sessions: SessionSummary[];
   colors: Map<string, string>;
   nowMs: number;
-  onSelect?: (name: string) => void;
+  onOpenSession: (s: SessionSummary) => void;
 }) {
-  const [weekStart, setWeekStart] = useState(() => startOfWeek(nowMs));
+  const [mode, setMode] = useState<"week" | "day">("week");
+  const [anchor, setAnchor] = useState(() => startOfDay(nowMs));
+  const [expanded, setExpanded] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const dayCount = mode === "week" ? 7 : 1;
+  const firstDay = mode === "week" ? startOfWeek(anchor) : startOfDay(anchor);
   const days = useMemo(
-    () => Array.from({ length: 7 }, (_, i) => weekStart + i * DAY_MS),
-    [weekStart]
+    () => Array.from({ length: dayCount }, (_, i) => firstDay + i * DAY_MS),
+    [firstDay, dayCount]
   );
 
   // Explode sessions into work blocks, clamp each to the day, lane-pack overlaps.
@@ -720,6 +753,7 @@ function WeekCalendar({
             const cs = Math.max(wb.start, dayStart);
             const ce = Math.min(wb.end, dayEnd);
             blocks.push({
+              session: s,
               projectName: s.projectName,
               activeMs: wb.durationMs,
               note: s.promptScore?.note,
@@ -765,68 +799,118 @@ function WeekCalendar({
   const H = (hMax - hMin) * CAL_ROW_H;
 
   const rangeLabel =
-    new Date(weekStart).toLocaleDateString("en-US", { month: "short", day: "numeric" }) +
-    " – " +
-    new Date(weekStart + 6 * DAY_MS).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-    });
+    mode === "week"
+      ? new Date(firstDay).toLocaleDateString("en-US", { month: "short", day: "numeric" }) +
+        " – " +
+        new Date(firstDay + 6 * DAY_MS).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        })
+      : new Date(firstDay).toLocaleDateString("en-US", {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+        });
 
-  const today = startOfWeek(nowMs);
+  const atNow =
+    mode === "week"
+      ? startOfWeek(anchor) === startOfWeek(nowMs)
+      : startOfDay(anchor) === startOfDay(nowMs);
+
+  // When collapsed, center the active hours in the 400px window.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || expanded) return;
+    el.scrollTop = Math.max(0, (el.scrollHeight - el.clientHeight) / 2);
+  }, [expanded, firstDay, mode, H]);
+
+  const headCell: React.CSSProperties = {
+    position: "sticky",
+    top: 0,
+    zIndex: 3,
+    background: "var(--surface-1)",
+  };
 
   return (
     <div>
       <div
         style={{
           display: "flex",
-          justifyContent: "flex-end",
+          justifyContent: "space-between",
           alignItems: "center",
           gap: 8,
           marginBottom: 10,
+          flexWrap: "wrap",
         }}
       >
-        {weekStart !== today ? (
-          <button className="view-toggle" onClick={() => setWeekStart(today)}>
-            This week
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <div className="seg" role="group" aria-label="Calendar view">
+            <button aria-pressed={mode === "week"} onClick={() => setMode("week")}>
+              Week
+            </button>
+            <button aria-pressed={mode === "day"} onClick={() => setMode("day")}>
+              Day
+            </button>
+          </div>
+          <button className="view-toggle" onClick={() => setExpanded((v) => !v)}>
+            {expanded ? "⤡ Collapse" : "⤢ Expand"}
           </button>
-        ) : null}
-        <button
-          className="view-toggle"
-          aria-label="Previous week"
-          onClick={() => setWeekStart((w) => w - 7 * DAY_MS)}
-        >
-          ‹
-        </button>
-        <span className="meta" style={{ minWidth: 118, textAlign: "center" }}>
-          {rangeLabel}
-        </span>
-        <button
-          className="view-toggle"
-          aria-label="Next week"
-          onClick={() => setWeekStart((w) => w + 7 * DAY_MS)}
-        >
-          ›
-        </button>
+        </div>
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          {!atNow ? (
+            <button
+              className="view-toggle"
+              onClick={() => setAnchor(startOfDay(nowMs))}
+            >
+              {mode === "week" ? "This week" : "Today"}
+            </button>
+          ) : null}
+          <button
+            className="view-toggle"
+            aria-label="Previous"
+            onClick={() => setAnchor((a) => a - dayCount * DAY_MS)}
+          >
+            ‹
+          </button>
+          <span className="meta" style={{ minWidth: 120, textAlign: "center" }}>
+            {rangeLabel}
+          </span>
+          <button
+            className="view-toggle"
+            aria-label="Next"
+            onClick={() => setAnchor((a) => a + dayCount * DAY_MS)}
+          >
+            ›
+          </button>
+        </div>
       </div>
 
-      <div className="scroll-x">
+      <div
+        ref={scrollRef}
+        className="scroll-x"
+        style={{
+          maxHeight: expanded ? undefined : CAL_COLLAPSED_H,
+          overflowY: expanded ? "visible" : "auto",
+        }}
+      >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "38px repeat(7, minmax(78px, 1fr))",
-            minWidth: 620,
+            gridTemplateColumns: `38px repeat(${dayCount}, minmax(78px, 1fr))`,
+            minWidth: mode === "week" ? 620 : 220,
           }}
         >
-          {/* header row */}
-          <div />
+          {/* header row (sticky while the body scrolls) */}
+          <div style={headCell} />
           {days.map((d) => (
             <div
               key={d}
               style={{
+                ...headCell,
                 textAlign: "center",
                 fontSize: 11.5,
                 color: "var(--text-muted)",
-                paddingBottom: 6,
+                padding: "2px 0 6px",
               }}
             >
               {new Date(d).toLocaleDateString("en-US", { weekday: "short" })}{" "}
@@ -883,10 +967,11 @@ function WeekCalendar({
                 return (
                   <div
                     key={bi}
-                    onClick={onSelect ? () => onSelect(b.projectName) : undefined}
+                    onClick={() => onOpenSession(b.session)}
                     title={
+                      (b.session.title ? `${b.session.title}\n` : "") +
                       `${b.projectName} · ${fmtTime(b.start)}\n` +
-                      `${fmtDuration(b.activeMs)} active` +
+                      `${fmtDuration(b.activeMs)} active — click for details` +
                       (b.note ? `\n${b.ptype}: ${b.note}` : "")
                     }
                     style={{
@@ -900,7 +985,7 @@ function WeekCalendar({
                       borderRadius: 4,
                       padding: "1px 5px",
                       overflow: "hidden",
-                      cursor: onSelect ? "pointer" : "default",
+                      cursor: "pointer",
                       fontSize: 10.5,
                       lineHeight: 1.2,
                       color: "var(--text-secondary)",
@@ -923,6 +1008,154 @@ function WeekCalendar({
               })}
             </div>
           ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Session detail modal                                                */
+/* ------------------------------------------------------------------ */
+
+function SessionModal({
+  session,
+  colors,
+  onClose,
+  onFocusProject,
+}: {
+  session: SessionSummary;
+  colors: Map<string, string>;
+  onClose: () => void;
+  onFocusProject: (name: string) => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  const rows: [string, React.ReactNode][] = [
+    [
+      "Date",
+      new Date(session.firstEvent).toLocaleDateString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+    ],
+    ["Time", `${fmtTime(session.firstEvent)} – ${fmtTime(session.lastEvent)}`],
+    ["Active time", fmtDuration(session.activeMs)],
+    ["Wall clock", fmtDuration(session.spanMs)],
+    ["Work blocks", String(session.blocks.length)],
+    [
+      "Messages",
+      `${session.userMessages} you / ${session.assistantMessages} Claude`,
+    ],
+  ];
+  if (session.gitBranch) rows.push(["Git branch", session.gitBranch]);
+  if (session.version) rows.push(["Claude version", session.version]);
+
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div
+        className="modal-card"
+        role="dialog"
+        aria-modal="true"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span
+            className="proj-key"
+            style={{ background: colors.get(session.projectName) ?? OTHER_VAR }}
+          />
+          <h3 style={{ margin: 0, fontSize: "1.05rem", flex: 1 }}>
+            {session.projectName}
+          </h3>
+          <button className="view-toggle" onClick={onClose} aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        {session.title ? (
+          <div
+            style={{
+              color: "var(--text-secondary)",
+              fontSize: 13,
+              marginTop: 5,
+            }}
+          >
+            {session.title}
+          </div>
+        ) : null}
+
+        {session.promptScore ? (
+          <div style={{ margin: "10px 0 14px" }}>
+            <PromptBadge score={session.promptScore} />
+            <div
+              style={{
+                color: "var(--text-secondary)",
+                fontSize: 12.5,
+                marginTop: 5,
+              }}
+            >
+              {session.promptScore.note}
+            </div>
+          </div>
+        ) : (
+          <div style={{ height: 10 }} />
+        )}
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "auto 1fr",
+            rowGap: 7,
+            columnGap: 16,
+            fontSize: 13,
+          }}
+        >
+          {rows.map(([k, v]) => (
+            <React.Fragment key={k}>
+              <div style={{ color: "var(--text-muted)" }}>{k}</div>
+              <div
+                style={{
+                  color: "var(--text-primary)",
+                  fontVariantNumeric: "tabular-nums",
+                }}
+              >
+                {v}
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+
+        <div
+          style={{
+            marginTop: 16,
+            paddingTop: 12,
+            borderTop: "1px solid var(--border)",
+            display: "flex",
+            gap: 8,
+            alignItems: "center",
+          }}
+        >
+          <button
+            className="view-toggle"
+            onClick={() => onFocusProject(session.projectName)}
+          >
+            Focus {session.projectName} →
+          </button>
+          <span style={{ flex: 1 }} />
+          <span
+            style={{ fontSize: 11, color: "var(--text-muted)" }}
+            title={session.projectPath}
+          >
+            {session.sessionId.slice(0, 8)}
+          </span>
         </div>
       </div>
     </div>
@@ -953,6 +1186,7 @@ export default function Dashboard({
   const [preset, setPreset] = useState("30d");
   const [theme, setTheme] = useState<"auto" | "light" | "dark">("auto");
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [modalSession, setModalSession] = useState<SessionSummary | null>(null);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -1116,7 +1350,7 @@ export default function Dashboard({
           }
           colors={colors}
           nowMs={report.generatedAt}
-          onSelect={selectedProject ? undefined : setSelectedProject}
+          onOpenSession={setModalSession}
         />
       </div>
 
@@ -1163,6 +1397,18 @@ export default function Dashboard({
         </a>{" "}
         — open source, MIT.
       </footer>
+
+      {modalSession ? (
+        <SessionModal
+          session={modalSession}
+          colors={colors}
+          onClose={() => setModalSession(null)}
+          onFocusProject={(name) => {
+            setSelectedProject(name);
+            setModalSession(null);
+          }}
+        />
+      ) : null}
     </div>
   );
 }

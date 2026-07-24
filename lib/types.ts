@@ -54,9 +54,11 @@ export interface SessionSummary {
   /** Transcript file this summary was computed from. */
   file: string;
   /**
-   * Optional prompt-health rating, attached after scanning by
-   * scripts/score-sessions. Never computed from message content in the parser.
+   * Short title summarizing the session, and a prompt-health rating — both
+   * attached after scanning by scripts/score-sessions (LLM-derived). Never
+   * computed from message content in the parser itself.
    */
+  title?: string;
   promptScore?: PromptScore;
 }
 

@@ -31,16 +31,21 @@ const SCHEMA = {
   type: "object",
   additionalProperties: false,
   properties: {
+    title: { type: "string" },
     type: { type: "string", enum: ["explore", "build", "debug", "mixed"] },
     rating: { type: "string", enum: ["green", "yellow", "red"] },
     score: { type: "integer", enum: [1, 2, 3, 4, 5] },
     note: { type: "string" },
   },
-  required: ["type", "rating", "score", "note"],
+  required: ["title", "type", "rating", "score", "note"],
 } as const;
 
 const RUBRIC = `You are a coding-workflow coach. You are given the USER's prompts from one
 Claude Code session (Claude's replies are omitted).
+
+STEP 0 — write a "title": a concise 4–7 word label for what this session was
+about, specific to the work (e.g. "DealerQR widget deploy fixes", "CEO site
+menu visibility bug"). No trailing punctuation.
 
 STEP 1 — classify the session's nature ("type"):
 - explore: open-ended brainstorming / figuring out an approach / building

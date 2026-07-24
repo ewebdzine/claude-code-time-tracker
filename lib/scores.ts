@@ -12,6 +12,8 @@ import path from "node:path";
 import type { PromptScore, TrackerReport } from "./types";
 
 export interface CachedScore extends PromptScore {
+  /** Short session title (LLM-derived). */
+  title?: string;
   scoredAt: number;
 }
 
@@ -43,6 +45,7 @@ export function attachScores(
     for (const s of project.sessions) {
       const sc = scores[s.sessionId];
       if (sc) {
+        if (sc.title) s.title = sc.title;
         s.promptScore = {
           type: sc.type,
           rating: sc.rating,
