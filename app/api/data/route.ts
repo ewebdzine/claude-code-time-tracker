@@ -1,4 +1,5 @@
 import { scan, defaultClaudeDir, DEFAULT_IDLE_THRESHOLD_MS } from "@/lib";
+import { loadReportFromBlob } from "@/lib/blob";
 
 /**
  * GET /api/data
@@ -32,12 +33,17 @@ export async function GET(req: Request) {
       timeZone,
     });
 
-    // Demo fallback (e.g. a Vercel deploy, where there is no ~/.claude):
-    // serve the bundled sample report so the hosted app works as a demo.
-    if (report.sessionCount === 0) {
-      const demo = await loadDemoReport();
-      if (demo) return Response.json({ ...demo, demo: true });
-    }
+    // Local run with real logs: serve the freshly scanned report.
+    if (report.sessionCount > 0) return Response.json(report);
+
+    // Hosted deploy (no ~/.claude): prefer the real report pushed to Blob by
+    // the dev machine; the idle threshold is whatever the push used.
+    const blob = await loadReportFromBlob();
+    if (blob) return Response.json({ ...blob, source: "blob" });
+
+    // Nothing pushed yet: fall back to the bundled demo so the page still works.
+    const demo = await loadDemoReport();
+    if (demo) return Response.json({ ...demo, demo: true });
 
     return Response.json(report);
   } catch (err) {

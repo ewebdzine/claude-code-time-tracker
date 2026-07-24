@@ -45,15 +45,38 @@ The app deploys to Vercel as-is (`vercel` or the GitHub integration — framewor
 - run `npm run dev` locally, or
 - generate a static snapshot (`npm run snapshot`) and host *that* anywhere — it's one HTML file with your data baked in.
 
+## Private hosted dashboard (magic link + your real data)
+
+Want your **real** hours on a hosted URL, visible only to you? The app has an
+optional, self-contained auth + data layer:
+
+- **Magic-link login.** Set `AUTH_SECRET` and `ALLOWED_EMAILS`, and every page/API
+  route is gated behind a passwordless email link (`middleware.ts`). Only listed
+  addresses can sign in — even a validly-signed token for another address is
+  rejected. Stateless (no database); links are sent via [Resend](https://resend.com)
+  (`RESEND_API_KEY`). With auth unset (local dev), the gate is bypassed entirely.
+- **Real data via Vercel Blob.** The dev machine pushes its report up with
+  `npm run push-blob` (needs `BLOB_READ_WRITE_TOKEN`); the hosted API reads it
+  server-side and serves it behind the login. Your data never touches the repo.
+  Run the push on a schedule (e.g. hourly cron) to keep it fresh.
+
+Env vars are documented in [`.env.example`](.env.example). When neither Blob nor
+real logs are present, the API still falls back to the bundled demo dataset.
+
 ## Project layout
 
 ```
 lib/parser.ts     JSONL transcript parser (~/.claude/projects scanner)
 lib/blocks.ts     work-block engine: idle splitting, day bucketing, aggregation
 lib/view.ts       browser-safe view helpers (range filters, colors, formatting)
+lib/auth.ts       magic-link auth: signed tokens, allowlist, Resend email (edge-safe)
+lib/blob.ts       reads the pushed report from Vercel Blob (hosted deploys)
+middleware.ts     gates every route behind the login when auth is configured
 components/       the dashboard (React, no chart library — hand-rolled SVG)
-app/api/data      scan endpoint (idleMinutes, days, tz params)
-scripts/          static snapshot exporter · demo data generator
+app/login         email-a-link sign-in page
+app/api/auth      request · callback · logout routes
+app/api/data      scan endpoint (idleMinutes, days, tz params) + Blob/demo fallback
+scripts/          static snapshot exporter · demo data generator · Blob push
 ```
 
 ## Tests
