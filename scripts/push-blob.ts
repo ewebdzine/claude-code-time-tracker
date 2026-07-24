@@ -43,18 +43,17 @@ async function main() {
     process.exit(1);
   }
 
-  const { url } = await put(BLOB_REPORT_PATHNAME, JSON.stringify(report), {
-    access: "public",
+  await put(BLOB_REPORT_PATHNAME, JSON.stringify(report), {
+    access: "private",
     contentType: "application/json",
     token,
     addRandomSuffix: false,
     allowOverwrite: true,
-    cacheControlMaxAge: 0,
   });
 
   console.log(
     `Pushed ${report.sessionCount} sessions / ` +
-      `${Math.round(report.totalActiveMs / 3600000)}h to Blob → ${url}`
+      `${Math.round(report.totalActiveMs / 3600000)}h active to Blob (${BLOB_REPORT_PATHNAME}).`
   );
 }
 

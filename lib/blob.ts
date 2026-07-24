@@ -5,22 +5,23 @@
  * so the Blob URL is never exposed to the browser.
  */
 
-import { list } from "@vercel/blob";
+import { get } from "@vercel/blob";
 
 /** Stable pathname the push script writes to (addRandomSuffix: false). */
 export const BLOB_REPORT_PATHNAME = "reports/latest.json";
 
-/** Load the latest pushed report from Blob, or null if unconfigured/missing. */
+/** Load the latest pushed report from the (private) Blob store, or null. */
 export async function loadReportFromBlob(): Promise<Record<string, unknown> | null> {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token) return null;
   try {
-    const { blobs } = await list({ prefix: BLOB_REPORT_PATHNAME, token, limit: 1 });
-    const blob = blobs.find((b) => b.pathname === BLOB_REPORT_PATHNAME) ?? blobs[0];
-    if (!blob) return null;
-    const res = await fetch(blob.url, { cache: "no-store" });
-    if (!res.ok) return null;
-    return (await res.json()) as Record<string, unknown>;
+    const result = await get(BLOB_REPORT_PATHNAME, {
+      access: "private",
+      token,
+      useCache: false, // always read the freshest push
+    });
+    if (!result) return null;
+    return (await new Response(result.stream).json()) as Record<string, unknown>;
   } catch {
     return null;
   }
