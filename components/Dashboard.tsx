@@ -655,6 +655,281 @@ function SessionsTable({
 }
 
 /* ------------------------------------------------------------------ */
+/* Week calendar                                                       */
+/* ------------------------------------------------------------------ */
+
+const CAL_ROW_H = 40; // px per hour
+const DAY_MS = 86400000;
+
+/** Local-midnight epoch for the Sunday of the week containing `ms`. */
+function startOfWeek(ms: number): number {
+  const d = new Date(ms);
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - d.getDay());
+  return d.getTime();
+}
+
+function fmtHourLabel(h: number): string {
+  const hh = h % 24;
+  const ap = hh < 12 ? "a" : "p";
+  const h12 = hh % 12 === 0 ? 12 : hh % 12;
+  return `${h12}${ap}`;
+}
+
+interface CalBlock {
+  projectName: string;
+  activeMs: number;
+  note?: string;
+  ptype?: string;
+  start: number; // epoch ms (clamped to the day)
+  startH: number; // hours since that day's midnight (0..24)
+  endH: number;
+  lane: number;
+}
+
+/**
+ * A week grid of the idle-split WORK BLOCKS (the actual active periods), placed
+ * by the time they ran and colored by project — not the full session spans.
+ */
+function WeekCalendar({
+  sessions,
+  colors,
+  nowMs,
+  onSelect,
+}: {
+  sessions: SessionSummary[];
+  colors: Map<string, string>;
+  nowMs: number;
+  onSelect?: (name: string) => void;
+}) {
+  const [weekStart, setWeekStart] = useState(() => startOfWeek(nowMs));
+  const days = useMemo(
+    () => Array.from({ length: 7 }, (_, i) => weekStart + i * DAY_MS),
+    [weekStart]
+  );
+
+  // Explode sessions into work blocks, clamp each to the day, lane-pack overlaps.
+  const perDay = useMemo(
+    () =>
+      days.map((dayStart) => {
+        const dayEnd = dayStart + DAY_MS;
+        const blocks: CalBlock[] = [];
+        for (const s of sessions) {
+          for (const wb of s.blocks) {
+            if (wb.end < dayStart || wb.start >= dayEnd) continue;
+            const cs = Math.max(wb.start, dayStart);
+            const ce = Math.min(wb.end, dayEnd);
+            blocks.push({
+              projectName: s.projectName,
+              activeMs: wb.durationMs,
+              note: s.promptScore?.note,
+              ptype: s.promptScore?.type,
+              start: cs,
+              startH: (cs - dayStart) / 3600000,
+              endH: (ce - dayStart) / 3600000,
+              lane: 0,
+            });
+          }
+        }
+        blocks.sort((a, b) => a.startH - b.startH);
+        const laneEnd: number[] = [];
+        for (const b of blocks) {
+          let lane = laneEnd.findIndex((e) => e <= b.startH);
+          if (lane === -1) {
+            lane = laneEnd.length;
+            laneEnd.push(b.endH);
+          } else laneEnd[lane] = b.endH;
+          b.lane = lane;
+        }
+        return { blocks, lanes: Math.max(1, laneEnd.length) };
+      }),
+    [days, sessions]
+  );
+
+  // Vertical range: clamp to the hours that actually have activity.
+  let hMin = 24;
+  let hMax = 0;
+  for (const d of perDay)
+    for (const b of d.blocks) {
+      hMin = Math.min(hMin, b.startH);
+      hMax = Math.max(hMax, b.endH);
+    }
+  if (hMin > hMax) {
+    hMin = 8;
+    hMax = 18;
+  }
+  hMin = Math.floor(hMin);
+  hMax = Math.ceil(hMax);
+  if (hMax - hMin < 4) hMax = hMin + 4;
+  const hours = Array.from({ length: hMax - hMin + 1 }, (_, i) => hMin + i);
+  const H = (hMax - hMin) * CAL_ROW_H;
+
+  const rangeLabel =
+    new Date(weekStart).toLocaleDateString("en-US", { month: "short", day: "numeric" }) +
+    " – " +
+    new Date(weekStart + 6 * DAY_MS).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+
+  const today = startOfWeek(nowMs);
+
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 10,
+        }}
+      >
+        {weekStart !== today ? (
+          <button className="view-toggle" onClick={() => setWeekStart(today)}>
+            This week
+          </button>
+        ) : null}
+        <button
+          className="view-toggle"
+          aria-label="Previous week"
+          onClick={() => setWeekStart((w) => w - 7 * DAY_MS)}
+        >
+          ‹
+        </button>
+        <span className="meta" style={{ minWidth: 118, textAlign: "center" }}>
+          {rangeLabel}
+        </span>
+        <button
+          className="view-toggle"
+          aria-label="Next week"
+          onClick={() => setWeekStart((w) => w + 7 * DAY_MS)}
+        >
+          ›
+        </button>
+      </div>
+
+      <div className="scroll-x">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "38px repeat(7, minmax(78px, 1fr))",
+            minWidth: 620,
+          }}
+        >
+          {/* header row */}
+          <div />
+          {days.map((d) => (
+            <div
+              key={d}
+              style={{
+                textAlign: "center",
+                fontSize: 11.5,
+                color: "var(--text-muted)",
+                paddingBottom: 6,
+              }}
+            >
+              {new Date(d).toLocaleDateString("en-US", { weekday: "short" })}{" "}
+              {new Date(d).getDate()}
+            </div>
+          ))}
+
+          {/* hour labels */}
+          <div style={{ position: "relative", height: H }}>
+            {hours.slice(0, -1).map((h) => (
+              <div
+                key={h}
+                style={{
+                  position: "absolute",
+                  top: (h - hMin) * CAL_ROW_H - 5,
+                  right: 6,
+                  fontSize: 10,
+                  color: "var(--text-muted)",
+                  fontVariantNumeric: "tabular-nums",
+                }}
+              >
+                {fmtHourLabel(h)}
+              </div>
+            ))}
+          </div>
+
+          {/* day columns */}
+          {perDay.map(({ blocks, lanes }, di) => (
+            <div
+              key={di}
+              style={{
+                position: "relative",
+                height: H,
+                borderLeft: "1px solid var(--grid)",
+              }}
+            >
+              {hours.slice(0, -1).map((h) => (
+                <div
+                  key={h}
+                  style={{
+                    position: "absolute",
+                    top: (h - hMin) * CAL_ROW_H,
+                    left: 0,
+                    right: 0,
+                    borderTop: "1px solid var(--grid)",
+                  }}
+                />
+              ))}
+              {blocks.map((b, bi) => {
+                const col = colors.get(b.projectName) ?? OTHER_VAR;
+                const top = (b.startH - hMin) * CAL_ROW_H;
+                const height = Math.max(14, (b.endH - b.startH) * CAL_ROW_H);
+                const w = 100 / lanes;
+                return (
+                  <div
+                    key={bi}
+                    onClick={onSelect ? () => onSelect(b.projectName) : undefined}
+                    title={
+                      `${b.projectName} · ${fmtTime(b.start)}\n` +
+                      `${fmtDuration(b.activeMs)} active` +
+                      (b.note ? `\n${b.ptype}: ${b.note}` : "")
+                    }
+                    style={{
+                      position: "absolute",
+                      top,
+                      height,
+                      left: `calc(${b.lane * w}% + 1px)`,
+                      width: `calc(${w}% - 2px)`,
+                      background: `color-mix(in srgb, ${col} 18%, transparent)`,
+                      borderLeft: `3px solid ${col}`,
+                      borderRadius: 4,
+                      padding: "1px 5px",
+                      overflow: "hidden",
+                      cursor: onSelect ? "pointer" : "default",
+                      fontSize: 10.5,
+                      lineHeight: 1.2,
+                      color: "var(--text-secondary)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontWeight: 600,
+                        color: "var(--text-primary)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {b.projectName}
+                    </div>
+                    {height > 28 ? <div>{fmtDuration(b.activeMs)}</div> : null}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Dashboard                                                           */
 /* ------------------------------------------------------------------ */
 
@@ -697,6 +972,12 @@ export default function Dashboard({
   const view = useMemo(
     () => computeView(report, presetDays, report.generatedAt, selectedProject),
     [report, presetDays, selectedProject]
+  );
+
+  // All sessions (calendar has its own week window, independent of the range).
+  const allSessions = useMemo(
+    () => report.projects.flatMap((p) => p.sessions),
+    [report]
   );
 
   // Prompt-health summary for the sessions in view.
@@ -820,6 +1101,23 @@ export default function Dashboard({
           </span>
         </div>
         <DailyChart view={view} series={series} colors={colors} />
+      </div>
+
+      <div className="card">
+        <div className="card-head">
+          <h2>Session calendar</h2>
+          <span className="meta">when you actually worked · hover a block</span>
+        </div>
+        <WeekCalendar
+          sessions={
+            selectedProject
+              ? allSessions.filter((s) => s.projectName === selectedProject)
+              : allSessions
+          }
+          colors={colors}
+          nowMs={report.generatedAt}
+          onSelect={selectedProject ? undefined : setSelectedProject}
+        />
       </div>
 
       <div className="card">
