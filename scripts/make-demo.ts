@@ -64,8 +64,9 @@ function makeSession(
       });
       t += 20000 + rand() * 300000; // …user replies within ~5 minutes
     }
-    // Walk away: a gap well past the idle threshold.
-    t += (30 + rand() * 150) * 60000;
+    // Walk away: a gap past the idle threshold (kept tighter so blocks in a
+    // day cluster rather than drifting into the small hours).
+    t += (20 + rand() * 70) * 60000;
   }
   const canonRead = rand() < 0.4 ? 1 + Math.floor(rand() * 6) : 0;
   return {
@@ -118,12 +119,12 @@ const now = Date.now();
 const sessions: SessionSummary[] = [];
 
 for (let day = 75; day >= 0; day--) {
-  // Not every day has work.
-  if (rand() < 0.3) continue;
-  const sessionsToday = 1 + Math.floor(rand() * 3);
+  // Most days have work.
+  if (rand() < 0.12) continue;
+  const sessionsToday = 2 + Math.floor(rand() * 4);
   for (let s = 0; s < sessionsToday; s++) {
     const project = PROJECTS[Math.floor(rand() * PROJECTS.length)];
-    const startHour = 8 + rand() * 11;
+    const startHour = 8 + rand() * 13;
     const start = now - day * 86400000 - (24 - startHour) * 3600000;
     const t = makeSession(project, start, day * 10 + s);
     const summary = summarizeSession(t, project);

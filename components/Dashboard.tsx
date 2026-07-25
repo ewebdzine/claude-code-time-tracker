@@ -683,7 +683,7 @@ function SessionsTable({
 /* Week calendar                                                       */
 /* ------------------------------------------------------------------ */
 
-const CAL_ROW_H = 40; // px per hour
+const CAL_ROW_H = 30; // px per hour
 const DAY_MS = 86400000;
 
 /** Local-midnight epoch for the day containing `ms`. */
