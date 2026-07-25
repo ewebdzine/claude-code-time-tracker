@@ -89,6 +89,31 @@ function makeSession(
   };
 }
 
+// Synthetic prompt-health ratings + titles so the demo showcases those too.
+const RATINGS: { rating: "green" | "yellow" | "red"; score: number }[] = [
+  { rating: "green", score: 5 },
+  { rating: "green", score: 4 },
+  { rating: "yellow", score: 3 },
+  { rating: "yellow", score: 3 },
+  { rating: "red", score: 2 },
+];
+const TYPES = ["explore", "build", "debug", "mixed"] as const;
+const TITLE_BY_PROJECT: Record<string, string[]> = {
+  storefront: ["Checkout flow redesign", "Cart persistence bug fix", "Product page A/B setup"],
+  "api-gateway": ["Rate-limit middleware", "Auth token refresh flow", "Webhook retry logic"],
+  "mobile-app": ["Push notification wiring", "Offline sync groundwork", "Onboarding screens"],
+  "data-pipeline": ["Nightly ETL refactor", "Schema migration + backfill", "Dedup job tuning"],
+  "marketing-site": ["Landing page rebuild", "Blog CMS integration", "SEO metadata pass"],
+  infra: ["Terraform module cleanup", "CI cache optimization", "Staging env provisioning"],
+};
+const NOTES = [
+  "Strong up-front spec with clear constraints and verification steps.",
+  "Ask Claude to run the tests before moving to the next phase.",
+  "State the acceptance criteria earlier so the options fit the goal.",
+  "Good course-correction; confirm each step before proceeding.",
+  "Lead with the concrete error and repro before diving into fixes.",
+];
+
 const now = Date.now();
 const sessions: SessionSummary[] = [];
 
@@ -102,7 +127,17 @@ for (let day = 75; day >= 0; day--) {
     const start = now - day * 86400000 - (24 - startHour) * 3600000;
     const t = makeSession(project, start, day * 10 + s);
     const summary = summarizeSession(t, project);
-    if (summary) sessions.push(summary);
+    if (!summary) continue;
+    const r = RATINGS[Math.floor(rand() * RATINGS.length)];
+    const titles = TITLE_BY_PROJECT[summary.projectName] ?? ["Session work"];
+    summary.title = titles[Math.floor(rand() * titles.length)];
+    summary.promptScore = {
+      type: TYPES[Math.floor(rand() * TYPES.length)],
+      rating: r.rating,
+      score: r.score,
+      note: NOTES[Math.floor(rand() * NOTES.length)],
+    };
+    sessions.push(summary);
   }
 }
 

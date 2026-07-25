@@ -11,7 +11,8 @@
     "snapshot": "tsx scripts/export-static.ts",
     "demo-data": "tsx scripts/make-demo.ts",
     "push-blob": "tsx scripts/push-blob.ts",
-    "score-sessions": "tsx scripts/score-sessions.ts"
+    "score-sessions": "tsx scripts/score-sessions.ts",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
@@ -28,6 +29,7 @@
     "esbuild": "^0.28.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.11",
+    "playwright": "^1.62.0",
     "tsx": "^4.23.1",
     "typescript": "^5",
     "vitest": "^4.1.10"
