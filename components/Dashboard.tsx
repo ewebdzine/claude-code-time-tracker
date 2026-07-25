@@ -535,6 +535,13 @@ const RATING_HEX = {
   red: "#f85149",
 } as const;
 
+/** Compact token counts: 1234567 → "1.2M", 45200 → "45K". */
+function fmtCompact(n: number): string {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(n >= 10_000_000 ? 0 : 1) + "M";
+  if (n >= 1_000) return (n / 1_000).toFixed(n >= 10_000 ? 0 : 1) + "K";
+  return String(n);
+}
+
 /** 🟢/🟡/🔴 dot + score + type tag; the coaching note is on hover. */
 function PromptBadge({ score }: { score?: SessionSummary["promptScore"] }) {
   if (!score)
@@ -1132,6 +1139,69 @@ function SessionModal({
             </React.Fragment>
           ))}
         </div>
+
+        {session.tokens ? (
+          <div style={{ marginTop: 16 }}>
+            <div className="modal-section-label">Tokens</div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "auto 1fr",
+                rowGap: 6,
+                columnGap: 16,
+                fontSize: 13,
+              }}
+            >
+              <div style={{ color: "var(--text-muted)" }}>Generated</div>
+              <div style={{ fontVariantNumeric: "tabular-nums" }}>
+                {fmtCompact(session.tokens.output)}
+              </div>
+              <div style={{ color: "var(--text-muted)" }}>New input</div>
+              <div style={{ fontVariantNumeric: "tabular-nums" }}>
+                {fmtCompact(session.tokens.input)}
+              </div>
+              <div style={{ color: "var(--text-muted)" }}>Cached context</div>
+              <div style={{ fontVariantNumeric: "tabular-nums" }}>
+                {fmtCompact(session.tokens.cacheRead)}
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {session.tools ? (
+          <div style={{ marginTop: 16 }}>
+            <div className="modal-section-label">Activity</div>
+            <div
+              style={{
+                fontSize: 13,
+                color: "var(--text-secondary)",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "3px 14px",
+              }}
+            >
+              <span>{session.tools.read} reads</span>
+              <span>{session.tools.edit} edits</span>
+              {session.tools.write ? <span>{session.tools.write} writes</span> : null}
+              <span>{session.tools.bash} bash</span>
+              <span>{session.tools.search} searches</span>
+              {session.tools.webSearch ? (
+                <span>{session.tools.webSearch} web</span>
+              ) : null}
+            </div>
+            <div style={{ marginTop: 8, fontSize: 13 }}>
+              <strong style={{ color: "var(--text-primary)" }}>
+                Canon references: {session.tools.canonRead}
+              </strong>
+              {session.tools.canonRework ? (
+                <span style={{ color: "var(--text-muted)" }}>
+                  {" "}
+                  · {session.tools.canonRework} consulted mid-build
+                </span>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
 
         <div
           style={{

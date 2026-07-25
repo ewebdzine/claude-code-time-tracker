@@ -14,6 +14,7 @@ import type {
   ProjectSummary,
   SessionEvent,
   SessionSummary,
+  TokenUsage,
   TrackerOptions,
   TrackerReport,
   WorkBlock,
@@ -44,14 +45,30 @@ export function buildBlocks(
   return blocks;
 }
 
+function zeroUsage(): TokenUsage {
+  return { input: 0, output: 0, cacheRead: 0, cacheCreate: 0 };
+}
+
+function addUsage(a: TokenUsage, b?: TokenUsage): TokenUsage {
+  if (b) {
+    a.input += b.input;
+    a.output += b.output;
+    a.cacheRead += b.cacheRead;
+    a.cacheCreate += b.cacheCreate;
+  }
+  return a;
+}
+
 function finishBlock(events: SessionEvent[]): WorkBlock {
   const start = events[0].timestamp;
   const end = events[events.length - 1].timestamp;
   let userMessages = 0;
   let assistantMessages = 0;
+  const tokens = zeroUsage();
   for (const e of events) {
     if (e.actor === "user") userMessages++;
     else if (e.actor === "assistant") assistantMessages++;
+    addUsage(tokens, e.usage);
   }
   return {
     start,
@@ -60,6 +77,7 @@ function finishBlock(events: SessionEvent[]): WorkBlock {
     eventCount: events.length,
     userMessages,
     assistantMessages,
+    tokens,
   };
 }
 
@@ -77,6 +95,7 @@ export function summarizeSession(
 
   const blocks = buildBlocks(events, idle);
   const projectPath = t.cwd ?? decodedPathFallback;
+  const tokens = blocks.reduce((acc, b) => addUsage(acc, b.tokens), zeroUsage());
 
   return {
     sessionId: t.sessionId,
@@ -93,6 +112,8 @@ export function summarizeSession(
     gitBranch: t.gitBranch,
     version: t.version,
     file: t.file,
+    tokens,
+    tools: t.tools,
   };
 }
 

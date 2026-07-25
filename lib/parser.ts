@@ -12,7 +12,20 @@
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
-import type { SessionEvent } from "./types";
+import type { SessionEvent, ToolUsage } from "./types";
+
+interface RawUsage {
+  input_tokens?: number;
+  output_tokens?: number;
+  cache_read_input_tokens?: number;
+  cache_creation_input_tokens?: number;
+}
+
+interface RawToolUse {
+  type?: string;
+  name?: string;
+  input?: { file_path?: string; path?: string };
+}
 
 /** Raw shape of a transcript line — intentionally loose. */
 interface RawLine {
@@ -24,6 +37,7 @@ interface RawLine {
   version?: string;
   isSidechain?: boolean;
   isMeta?: boolean;
+  message?: { usage?: RawUsage; content?: RawToolUse[] };
 }
 
 export interface ParsedTranscript {
@@ -34,6 +48,32 @@ export interface ParsedTranscript {
   gitBranch?: string;
   version?: string;
   events: SessionEvent[];
+  /** Tool-usage trace for the whole transcript. */
+  tools: ToolUsage;
+}
+
+function emptyTools(): ToolUsage {
+  return {
+    read: 0,
+    edit: 0,
+    write: 0,
+    bash: 0,
+    search: 0,
+    canonRead: 0,
+    canonRework: 0,
+    webSearch: 0,
+  };
+}
+
+/** Does a file path look like a Canonify canon doc? */
+function isCanonPath(fp: string | undefined): boolean {
+  if (!fp) return false;
+  const p = fp.toLowerCase();
+  return (
+    /canonify\.md$/.test(p) ||
+    /(^|\/)canon/.test(p) ||
+    (p.includes("/docs/") && p.endsWith(".md"))
+  );
 }
 
 /**
@@ -58,6 +98,11 @@ export async function parseTranscript(file: string): Promise<ParsedTranscript | 
   let gitBranch: string | undefined;
   let version: string | undefined;
 
+  const tools = emptyTools();
+  // Track the Edit/Write → canon Read → Edit/Write "rework" pattern.
+  let sawBuild = false;
+  let canonPending = false;
+
   try {
     for await (const line of rl) {
       if (!line.trim()) continue;
@@ -76,11 +121,69 @@ export async function parseTranscript(file: string): Promise<ParsedTranscript | 
       const ts = Date.parse(raw.timestamp);
       if (Number.isNaN(ts)) continue;
 
+      // Token usage + tool trace live on assistant turns.
+      let usage: SessionEvent["usage"];
+      if (raw.type === "assistant" && raw.message) {
+        const u = raw.message.usage;
+        if (u) {
+          usage = {
+            input: u.input_tokens ?? 0,
+            output: u.output_tokens ?? 0,
+            cacheRead: u.cache_read_input_tokens ?? 0,
+            cacheCreate: u.cache_creation_input_tokens ?? 0,
+          };
+        }
+        for (const b of raw.message.content ?? []) {
+          if (!b || b.type !== "tool_use") continue;
+          const name = b.name ?? "";
+          const fp = b.input?.file_path ?? b.input?.path;
+          switch (name) {
+            case "Edit":
+            case "MultiEdit":
+              tools.edit++;
+              if (canonPending) {
+                tools.canonRework++;
+                canonPending = false;
+              }
+              sawBuild = true;
+              break;
+            case "Write":
+              tools.write++;
+              if (canonPending) {
+                tools.canonRework++;
+                canonPending = false;
+              }
+              sawBuild = true;
+              break;
+            case "Read":
+            case "NotebookRead":
+              tools.read++;
+              if (isCanonPath(fp)) {
+                tools.canonRead++;
+                if (sawBuild) canonPending = true;
+              }
+              break;
+            case "Grep":
+            case "Glob":
+              tools.search++;
+              break;
+            case "Bash":
+              tools.bash++;
+              break;
+            case "WebSearch":
+            case "WebFetch":
+              tools.webSearch++;
+              break;
+          }
+        }
+      }
+
       events.push({
         timestamp: ts,
         actor: raw.type as SessionEvent["actor"],
         sessionId: raw.sessionId ?? sessionId ?? path.basename(file, ".jsonl"),
         isSidechain: raw.isSidechain === true,
+        ...(usage ? { usage } : {}),
       });
     }
   } finally {
@@ -98,6 +201,7 @@ export async function parseTranscript(file: string): Promise<ParsedTranscript | 
     gitBranch,
     version,
     events,
+    tools,
   };
 }
 

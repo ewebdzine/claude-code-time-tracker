@@ -2,6 +2,33 @@
  * Core types for claude-code-time-tracker.
  */
 
+/** Token usage, summed from `message.usage` on assistant turns. */
+export interface TokenUsage {
+  /** Fresh (uncached) input tokens. */
+  input: number;
+  /** Generated output tokens. */
+  output: number;
+  /** Context re-read from cache (cheap). */
+  cacheRead: number;
+  /** Context written to cache. */
+  cacheCreate: number;
+}
+
+/** How a session used its tools — a lightweight "how it worked" trace. */
+export interface ToolUsage {
+  read: number;
+  edit: number;
+  write: number;
+  bash: number;
+  /** Grep + Glob — codebase searching/exploration. */
+  search: number;
+  /** Read calls whose path is a Canonify canon doc. */
+  canonRead: number;
+  /** Edit/Write → canon Read → Edit/Write (canon consulted mid-build). */
+  canonRework: number;
+  webSearch: number;
+}
+
 /** A single timestamped event pulled from a Claude Code session transcript. */
 export interface SessionEvent {
   /** ISO timestamp of the event. */
@@ -12,6 +39,8 @@ export interface SessionEvent {
   sessionId: string;
   /** Whether this event came from a subagent sidechain. */
   isSidechain: boolean;
+  /** Token usage for this turn (assistant turns only). */
+  usage?: TokenUsage;
 }
 
 /** A contiguous block of activity within a session (no gaps > idle threshold). */
@@ -26,6 +55,8 @@ export interface WorkBlock {
   userMessages: number;
   /** Number of assistant messages in this block. */
   assistantMessages: number;
+  /** Token usage within this block (sum of its assistant turns). */
+  tokens?: TokenUsage;
 }
 
 /** One Claude Code session (one JSONL transcript file). */
@@ -53,6 +84,10 @@ export interface SessionSummary {
   version?: string;
   /** Transcript file this summary was computed from. */
   file: string;
+  /** Total token usage across the session (sum of its blocks). */
+  tokens?: TokenUsage;
+  /** Tool-usage trace (reads, edits, searches, canon references, …). */
+  tools?: ToolUsage;
   /**
    * Short title summarizing the session, and a prompt-health rating — both
    * attached after scanning by scripts/score-sessions (LLM-derived). Never

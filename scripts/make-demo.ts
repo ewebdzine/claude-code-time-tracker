@@ -55,12 +55,19 @@ function makeSession(
         actor: "assistant",
         sessionId,
         isSidechain: false,
+        usage: {
+          input: 500 + Math.floor(rand() * 3000),
+          output: 150 + Math.floor(rand() * 1800),
+          cacheRead: 8000 + Math.floor(rand() * 90000),
+          cacheCreate: Math.floor(rand() * 8000),
+        },
       });
       t += 20000 + rand() * 300000; // …user replies within ~5 minutes
     }
     // Walk away: a gap well past the idle threshold.
     t += (30 + rand() * 150) * 60000;
   }
+  const canonRead = rand() < 0.4 ? 1 + Math.floor(rand() * 6) : 0;
   return {
     file: `/demo/${sessionId}.jsonl`,
     sessionId,
@@ -68,6 +75,16 @@ function makeSession(
     gitBranch: rand() > 0.5 ? "main" : "feature/demo",
     version: "2.1.0",
     events,
+    tools: {
+      read: 3 + Math.floor(rand() * 20),
+      edit: 2 + Math.floor(rand() * 15),
+      write: Math.floor(rand() * 4),
+      bash: Math.floor(rand() * 10),
+      search: canonRead > 0 ? Math.floor(rand() * 2) : 2 + Math.floor(rand() * 10),
+      canonRead,
+      canonRework: canonRead > 0 && rand() < 0.5 ? 1 + Math.floor(rand() * 2) : 0,
+      webSearch: Math.floor(rand() * 3),
+    },
   };
 }
 
