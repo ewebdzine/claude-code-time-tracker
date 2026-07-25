@@ -114,6 +114,7 @@ export function summarizeSession(
     file: t.file,
     tokens,
     tools: t.tools,
+    entrypoint: t.entrypoint,
   };
 }
 

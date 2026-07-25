@@ -1065,6 +1065,15 @@ function SessionModal({
   ];
   if (session.gitBranch) rows.push(["Git branch", session.gitBranch]);
   if (session.version) rows.push(["Claude version", session.version]);
+  if (session.entrypoint) {
+    const client =
+      session.entrypoint === "claude-desktop"
+        ? "Desktop app"
+        : session.entrypoint === "cli"
+          ? "CLI"
+          : session.entrypoint;
+    rows.push(["Client", client]);
+  }
 
   return (
     <div className="modal-backdrop" onClick={onClose}>

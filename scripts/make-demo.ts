@@ -74,6 +74,7 @@ function makeSession(
     cwd: project,
     gitBranch: rand() > 0.5 ? "main" : "feature/demo",
     version: "2.1.0",
+    entrypoint: rand() < 0.15 ? "cli" : "claude-desktop",
     events,
     tools: {
       read: 3 + Math.floor(rand() * 20),

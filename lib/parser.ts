@@ -37,6 +37,7 @@ interface RawLine {
   version?: string;
   isSidechain?: boolean;
   isMeta?: boolean;
+  entrypoint?: string;
   message?: { usage?: RawUsage; content?: RawToolUse[] };
 }
 
@@ -50,6 +51,8 @@ export interface ParsedTranscript {
   events: SessionEvent[];
   /** Tool-usage trace for the whole transcript. */
   tools: ToolUsage;
+  /** Dominant client entrypoint (e.g. "claude-desktop", "cli"). */
+  entrypoint?: string;
 }
 
 function emptyTools(): ToolUsage {
@@ -99,6 +102,7 @@ export async function parseTranscript(file: string): Promise<ParsedTranscript | 
   let version: string | undefined;
 
   const tools = emptyTools();
+  const entrypoints = new Map<string, number>();
   // Track the Edit/Write → canon Read → Edit/Write "rework" pattern.
   let sawBuild = false;
   let canonPending = false;
@@ -116,6 +120,8 @@ export async function parseTranscript(file: string): Promise<ParsedTranscript | 
       if (raw.gitBranch && !gitBranch) gitBranch = raw.gitBranch;
       if (raw.version && !version) version = raw.version;
       if (raw.sessionId && !sessionId) sessionId = raw.sessionId;
+      if (raw.entrypoint)
+        entrypoints.set(raw.entrypoint, (entrypoints.get(raw.entrypoint) ?? 0) + 1);
 
       if (!raw.timestamp || !raw.type || !ACTOR_TYPES.has(raw.type)) continue;
       const ts = Date.parse(raw.timestamp);
@@ -194,6 +200,8 @@ export async function parseTranscript(file: string): Promise<ParsedTranscript | 
   if (events.length === 0) return null;
   events.sort((a, b) => a.timestamp - b.timestamp);
 
+  const entrypoint = [...entrypoints.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+
   return {
     file,
     sessionId: sessionId ?? path.basename(file, ".jsonl"),
@@ -202,6 +210,7 @@ export async function parseTranscript(file: string): Promise<ParsedTranscript | 
     version,
     events,
     tools,
+    entrypoint,
   };
 }
 

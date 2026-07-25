@@ -88,6 +88,8 @@ export interface SessionSummary {
   tokens?: TokenUsage;
   /** Tool-usage trace (reads, edits, searches, canon references, …). */
   tools?: ToolUsage;
+  /** Client the session ran in (e.g. "claude-desktop", "cli"). */
+  entrypoint?: string;
   /**
    * Short title summarizing the session, and a prompt-health rating — both
    * attached after scanning by scripts/score-sessions (LLM-derived). Never
