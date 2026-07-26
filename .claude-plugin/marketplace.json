@@ -1,0 +1,16 @@
+{
+  "name": "time-tracker",
+  "owner": {
+    "name": "ewebdzine",
+    "email": "brent@ewebdzine.com"
+  },
+  "description": "The Claude Code Time Tracker plugin marketplace.",
+  "plugins": [
+    {
+      "name": "time-tracker",
+      "source": { "source": "url", "url": "https://github.com/ewebdzine/claude-code-time-tracker.git" },
+      "description": "Idle-aware time tracking for Claude Code, run locally: `setup` installs it, `launch` opens the dashboard (active hours, work calendar, token/tool usage, prompt-health). `deploy-vercel` optionally stands up a private, magic-link-gated hosted version. Your transcripts never leave your machine.",
+      "homepage": "https://github.com/ewebdzine/claude-code-time-tracker"
+    }
+  ]
+}

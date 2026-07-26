@@ -90,6 +90,28 @@ npm run dev
 
 Open http://localhost:3000. The dashboard reads `~/.claude` on the machine it runs on (override with the `CLAUDE_DIR` environment variable). It re-reads your logs on every request, so it's always current — nothing to refresh.
 
+## Or run it as a Claude Code plugin
+
+Prefer not to touch a terminal? This repo **is** a Claude Code plugin — install it and drive the whole thing with skills.
+
+```
+/plugin marketplace add ewebdzine/claude-code-time-tracker
+/plugin install time-tracker
+```
+
+Then, from any Claude Code session:
+
+| Skill | What it does |
+|---|---|
+| `/time-tracker:setup` | Installs the app locally (into `~/.claude-time-tracker`) and its dependencies. Re-run to update. |
+| `/time-tracker:launch` | Starts the dashboard in the background and opens it in your browser. |
+| `/time-tracker:stop` | Shuts the dashboard down. |
+| `/time-tracker:score` | Rates how well you prompted, per session (optional; needs your own Anthropic key). |
+| `/time-tracker:snapshot` | Exports a static, shareable report. |
+| `/time-tracker:deploy-vercel` | Optional wizard to host it on Vercel behind a private magic-link login, fed by your real data. |
+
+Everything stays **local by default** — no account, no keys, nothing uploaded. The Vercel skill is the only step that puts anything online, and only when you ask for it.
+
 ## How active time is computed
 
 1. Every transcript line with a timestamp and a `user` / `assistant` / `system` type becomes an event.

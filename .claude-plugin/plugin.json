@@ -1,0 +1,13 @@
+{
+  "name": "time-tracker",
+  "version": "0.1.0",
+  "description": "Claude Code Time Tracker - idle-aware time tracking for Claude Code that runs 100% locally. Reads your ~/.claude logs and shows active hours (not wall-clock) per project/day/session, a work calendar, per-session token & tool usage, canon references, and optional AI prompt-health ratings. `setup` installs it, `launch` opens the dashboard in your browser, `stop` shuts it down, and `deploy-vercel` optionally stands up a private, magic-link-gated hosted version. Your transcripts never leave your machine.",
+  "author": {
+    "name": "ewebdzine",
+    "email": "brent@ewebdzine.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ewebdzine/claude-code-time-tracker",
+  "repository": "https://github.com/ewebdzine/claude-code-time-tracker",
+  "keywords": ["claude-code", "time-tracking", "dashboard", "analytics", "tokens", "productivity", "local", "vercel"]
+}
